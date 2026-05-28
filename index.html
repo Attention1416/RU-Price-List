@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>全链路产品定价核算 ERP</title>
     <style>
-        /* ==================== 紧凑型 CSS 样式 ==================== */
         :root{--bg-color:#f3f4f6;--card-bg:rgba(255,255,255,0.9);--border-color:#ffffff;--text-main:#000000;--text-label:#374151;--text-placeholder:#9ca3af;--input-bg:#f3f4f6;--input-hover:#e5e7eb;--color-wb:#cb11ab;--color-ozon:#005bff;--color-indigo-50:#eef2ff;--color-indigo-500:#6366f1;--color-emerald-50:#ecfdf5;--color-emerald-500:#10b981;--color-amber-50:#fffbeb;--color-amber-500:#f59e0b;--color-rose-50:#fff1f2;--color-rose-500:#f43f5e;--color-teal-50:#f0fdfa;--color-teal-600:#0d9488;--color-red-50:#fef2f2;--color-red-600:#dc2626;--color-orange-50:#fff7ed;}
         *{box-sizing:border-box;margin:0;padding:0;}
         body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background-color:var(--bg-color);background-image:linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);min-height:100vh;color:var(--text-main);}
@@ -24,7 +23,7 @@
         .header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1rem;padding-left:0.5rem;}
         .header-title h1{font-size:1.75rem;font-weight:900;letter-spacing:-0.025em;margin-bottom:0;}
         .platform-selector{display:flex;gap:2rem;margin-bottom:2rem;justify-content:center;flex-wrap:wrap;}
-        .platform-card{flex:1;min-width:300px;max-width:450px;border-radius:1.5rem;padding:2.5rem 2rem;cursor:pointer;transition:all .3s ease;text-align:center;color:white;position:relative;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);}
+        .platform-card{flex:1;min-width:300px;max-width:450px;border-radius:1.5rem;padding:2.5rem 2rem;cursor:pointer;transition:all .3s cubic-bezier(0.4,0,0.2,1);text-align:center;color:white;position:relative;overflow:hidden;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);}
         .platform-card:hover{transform:translateY(-5px);box-shadow:0 20px 25px -5px rgba(0,0,0,0.15);}
         .card-wb{background:linear-gradient(135deg,#cb11ab 0%,#8b00ff 100%);}
         .card-ozon{background:linear-gradient(135deg,#005bff 0%,#003b99 100%);}
@@ -34,25 +33,27 @@
         .plat-tag{padding:0.3rem 0.8rem;border-radius:99px;font-size:0.8rem;font-weight:800;color:white;display:inline-block;}
         .tag-wb{background-color:var(--color-wb);}
         .tag-ozon{background-color:var(--color-ozon);}
-        .card{background-color:var(--card-bg);backdrop-filter:blur(12px);border-radius:1.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);border:1px solid var(--border-color);padding:1.25rem 1.5rem;margin-bottom:0;}
+        .card{background-color:var(--card-bg);backdrop-filter:blur(12px);border-radius:1.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);border:1px solid var(--border-color);padding:1.25rem 1.5rem;transition:all .3s ease;margin-bottom:0;}
         .card-title{font-size:1.125rem;font-weight:800;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;color:#1f2937;}
         .card-title-indicator{width:0.35rem;height:1.25rem;border-radius:9999px;}
         .sub-module-title{font-size:0.9rem;font-weight:700;margin-top:1.25rem;margin-bottom:0.75rem;padding-top:1rem;border-top:1px dashed #cbd5e1;display:flex;align-items:center;gap:0.5rem;color:#4b5563;}
         .input-row{display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end;margin-bottom:1rem;}
         .result-row{display:flex;flex-wrap:wrap;gap:0.75rem;padding-top:0.75rem;border-top:1px solid var(--input-hover);}
-        .input-group{background-color:var(--input-bg);border-radius:1rem;padding:0.5rem 0.875rem;display:flex;flex-direction:column;flex:1;min-width:120px;}
+        .input-group{background-color:var(--input-bg);border-radius:1rem;padding:0.5rem 0.875rem;display:flex;flex-direction:column;transition:background-color .2s ease;flex:1;min-width:120px;}
         .input-group:hover{background-color:var(--input-hover);}
         .input-group label{font-size:0.7rem;font-weight:700;color:var(--text-label);margin-bottom:0.15rem;text-transform:uppercase;white-space:nowrap;}
         .input-wrapper{display:flex;align-items:center;gap:0.25rem;position:relative;width:100%;}
         .symbol{font-weight:700;color:var(--text-main);font-size:0.9rem;}
-        input[type="number"],input[type="text"]{background:transparent;border:none;font-size:1.125rem;font-weight:800;color:var(--text-main);outline:none;width:100%;min-width:2rem;}
+        input[type="number"],input[type="text"]{background:transparent;border:none;font-size:1.125rem;font-weight:800;color:var(--text-main);outline:none;width:100%;min-width:2rem;text-align:left;}
         input::placeholder{color:var(--text-placeholder);font-weight:500;}
         .combo-group{background-color:var(--input-bg);border-radius:1rem;padding:0.5rem 0.875rem;display:flex;flex-direction:column;flex:1;min-width:200px;}
         .combo-group label{font-size:0.7rem;font-weight:700;color:var(--text-label);margin-bottom:0.15rem;text-transform:uppercase;}
         .combo-inputs{display:flex;align-items:center;gap:0.5rem;}
         .combo-inputs input{width:2.5rem;text-align:center;font-size:1.125rem;font-weight:800;color:var(--text-main);}
         .multiply-sign{font-size:0.9rem;font-weight:700;color:var(--text-main);}
-        select{background:transparent;border:none;font-size:1rem;font-weight:700;color:var(--text-main);outline:none;width:100%;cursor:pointer;}
+        select{background:transparent;border:none;font-size:1rem;font-weight:700;color:var(--text-main);outline:none;width:100%;appearance:none;cursor:pointer;padding-right:1.2rem;text-overflow:ellipsis;white-space:nowrap;}
+        .select-wrapper{position:relative;display:flex;align-items:center;width:100%;}
+        .select-wrapper::after{content:"▼";font-size:0.6rem;position:absolute;right:0;top:55%;transform:translateY(-50%);pointer-events:none;color:var(--text-main);}
         .result-box{border-radius:1rem;padding:0.75rem 1rem;display:flex;flex-direction:column;flex:1;min-width:140px;}
         .result-box label{font-size:0.75rem;font-weight:700;margin-bottom:0.25rem;white-space:nowrap;}
         .result-box input{font-size:1.5rem;font-weight:900;width:100%;text-align:right;}
@@ -74,15 +75,16 @@
         .btn-outline{background-color:transparent;border:2px solid #e5e7eb;color:#4b5563;} .btn-outline:hover{background-color:#f3f4f6;}
         .btn-success{background-color:var(--color-emerald-500);color:white;} .btn-success:hover{background-color:#059669;transform:translateY(-1px);}
         .btn-danger{background-color:var(--color-red-600);color:white;}
-        .btn-warning{background-color:var(--color-amber-500);color:white;} .btn-warning:hover{background-color:#d97706;}
-        .sku-input{background:#f8fafc;border:2px solid #e2e8f0;border-radius:99px;padding:0.5rem 1rem;font-size:1rem;font-weight:700;color:var(--color-indigo-500);width:250px;text-align:center;outline:none;}
+        .btn-warning{background-color:var(--color-amber-500);color:white;box-shadow:0 4px 6px -1px rgba(245,158,11,0.4);} .btn-warning:hover{background-color:#d97706;}
+        .sku-input{background:#f8fafc;border:2px solid #e2e8f0;border-radius:99px;padding:0.5rem 1rem;font-size:1rem;font-weight:700;color:var(--color-indigo-500);width:250px;text-align:center;outline:none;transition:border-color 0.2s;}
+        .sku-input:focus{border-color:var(--color-indigo-500);}
         .template-group{display:flex;align-items:center;gap:0.25rem;background:#f8fafc;border:2px solid #e2e8f0;border-radius:99px;padding:0.25rem 0.5rem;}
         .template-group select{border:none;background:transparent;font-size:0.9rem;font-weight:700;color:var(--color-indigo-500);width:140px;padding-left:0.5rem;outline:none;}
-        .btn-icon{border:none;background:transparent;padding:0.4rem 0.8rem;border-radius:99px;cursor:pointer;font-size:0.85rem;font-weight:700;transition:all .2s;}
+        .btn-icon{border:none;background:transparent;padding:0.4rem 0.8rem;border-radius:99px;cursor:pointer;font-size:0.85rem;font-weight:700;transition:all 0.2s;display:flex;align-items:center;gap:0.3rem;}
         .btn-icon:hover{background:#e2e8f0;} .text-amber{color:#d97706;} .text-indigo{color:#4f46e5;} .text-red{color:#dc2626;}
         .profit-negative{background-color:#dc2626 !important;color:white !important;box-shadow:0 0 15px rgba(220,38,38,0.5) !important;}
         .progress-box{position:relative;overflow:hidden;background-color:#f1f5f9;border:1px solid #e2e8f0;border-radius:1rem;padding:0.75rem 1.25rem;display:flex;flex-direction:column;min-width:140px;z-index:1;}
-        .progress-bar{position:absolute;top:0;left:0;height:100%;z-index:-1;transition:width .5s ease,background .3s ease;}
+        .progress-bar{position:absolute;top:0;left:0;height:100%;z-index:-1;transition:width 0.5s ease,background 0.3s ease;}
         .progress-box label{font-size:0.75rem;font-weight:700;margin-bottom:0.25rem;color:#1e293b;}
         .progress-box input{font-size:1.5rem;font-weight:900;color:#0f172a;text-align:right;width:100%;background:transparent;border:none;outline:none;}
         .bar-blue{background:linear-gradient(90deg,rgba(147,197,253,0.8) 0%,rgba(191,219,254,0.2) 100%);}
@@ -91,13 +93,15 @@
         .text-red-alert input,.text-red-alert label{color:#991b1b !important;}
         .table-container{background:var(--card-bg);border-radius:1.5rem;padding:1.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);overflow-x:auto;}
         .filter-bar{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:center;justify-content:flex-start;}
-        .filter-input{background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:0.6rem 1rem;font-size:0.95rem;font-weight:600;color:var(--text-main);outline:none;width:300px;}
+        .filter-input{background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:0.6rem 1rem;font-size:0.95rem;font-weight:600;color:var(--text-main);outline:none;transition:border-color 0.2s;width:300px;}
+        .filter-input:focus{border-color:var(--color-indigo-500);}
         .filter-select{background:#f8fafc;border:1px solid #e2e8f0;border-radius:0.75rem;padding:0.6rem 1rem;font-size:0.95rem;font-weight:600;color:var(--text-main);outline:none;cursor:pointer;width:180px;}
         table{width:100%;border-collapse:collapse;text-align:center;} th{padding:1rem;font-size:0.85rem;font-weight:700;color:#64748b;border-bottom:2px solid #f1f5f9;white-space:nowrap;text-align:center;} td{padding:1rem;font-size:0.95rem;font-weight:700;color:#0f172a;border-bottom:1px solid #f1f5f9;white-space:nowrap;text-align:center;vertical-align:middle;} tr:hover td{background-color:#f8fafc;}
         .text-profit{color:var(--color-emerald-500);} .text-loss{color:var(--color-red-600);}
         input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
         .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;} .dot-green{background-color:#10b981;box-shadow:0 0 5px #10b981;} .dot-yellow{background-color:#f59e0b;box-shadow:0 0 5px #f59e0b;}
         #csvPasteArea{width:100%;height:120px;border:2px dashed #cbd5e1;border-radius:1rem;padding:1rem;font-size:0.85rem;color:#4b5563;background:#f8fafc;resize:vertical;margin-bottom:0.5rem;outline:none;}
+        #csvPasteArea:focus{border-color:var(--color-ozon);background:#fff;}
     </style>
 </head>
 <body>
@@ -119,7 +123,7 @@
             <button class="btn btn-outline" onclick="exportData()">💾 导出产品与模板备份</button>
             <input type="file" id="importFile" style="display: none;" accept=".json" onchange="importData(event)">
             <button class="btn btn-outline" onclick="document.getElementById('importFile').click()">📂 导入产品数据</button>
-            <button class="btn btn-danger" onclick="clearAllData()">🗑️ 清理所有缓存</button>
+            <button class="btn btn-danger" style="padding:0.6rem 1.2rem; font-size:0.9rem;" onclick="clearAllData()">🗑️ 清理所有缓存</button>
         </div>
     </div>
 
@@ -159,7 +163,7 @@
                 <button class="btn btn-success" onclick="saveProduct()">💾 保存产品</button>
             </div>
             <div class="template-group">
-                <select id="templateSelect"><option value="">-- 定价通用模板 --</option></select>
+                <div class="select-wrapper" style="width: 140px;"><select id="templateSelect"><option value="">-- 定价通用模板 --</option></select></div>
                 <button class="btn-icon text-indigo" onclick="applyTemplate()" title="应用选中的模板">⬇️ 应用</button>
                 <button class="btn-icon text-amber" onclick="saveAsTemplate()" title="将当前费率/税率存为新模板">⭐ 存模板</button>
                 <button class="btn-icon text-red" onclick="deleteTemplate()" title="删除该模板">🗑️</button>
@@ -171,13 +175,13 @@
                 <div class="card" id="module-1">
                     <h2 class="card-title"><div class="card-title-indicator bg-indigo"></div>产品基础信息</h2>
                     <div class="input-row">
-                        <div class="input-group"><label>产品成本 (RMB)</label><div class="input-wrapper"><span class="symbol">¥</span><input type="number" id="productCost" placeholder="0" oninput="calculateAll()"></div></div>
-                        <div class="input-group"><label>汇率</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="exchangeRate" placeholder="12.5" oninput="calculateAll()"></div></div>
-                        <div class="combo-group" style="min-width: 250px;"><label>尺寸 (长×宽×高 cm)</label><div class="combo-inputs"><input type="number" id="length" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="width" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="height" placeholder="0" oninput="calculateAll()"></div></div>
+                        <div class="input-group"><label>产品成本 (RMB)</label><div class="input-wrapper"><span class="symbol">¥</span><input type="number" id="productCost" placeholder="0" oninput="calculateAll()" style="width: 100%; text-align: left;"></div></div>
+                        <div class="input-group"><label>汇率</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="exchangeRate" placeholder="12.5" oninput="calculateAll()" style="width: 100%; text-align: left;"></div></div>
+                        <div class="combo-group" style="min-width: 250px;"><label>尺寸 (长×宽×高 cm)</label><div class="combo-inputs" style="justify-content: space-between;"><input type="number" id="length" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="width" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="height" placeholder="0" oninput="calculateAll()"></div></div>
                     </div>
                     <div class="result-row">
-                        <div class="result-box res-light-indigo res-small" style="text-align: left;"><label>产品体积</label><div class="input-wrapper"><input type="text" id="volume" readonly placeholder="0.00"><span class="symbol">L</span></div></div>
-                        <div class="result-box res-dark-indigo res-small" style="flex:1;"><label>单位成本 (RUB)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="unitCost" readonly placeholder="0"></div></div>
+                        <div class="result-box res-light-indigo res-small" style="text-align: left;"><label>产品体积</label><div class="input-wrapper"><input type="text" id="volume" readonly placeholder="0.00" style="text-align: left;"><span class="symbol">L</span></div></div>
+                        <div class="result-box res-dark-indigo res-small" style="flex:1;"><label>单位成本 (RUB)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="unitCost" readonly placeholder="0" style="text-align: left;"></div></div>
                     </div>
                 </div>
 
@@ -187,15 +191,14 @@
                         <div class="input-group" style="flex:1;"><label>税制方案</label><div class="select-wrapper"><select id="taxSystem" onchange="calculateAll()"><option value="t1">销售税 6%</option><option value="t2">所得税 15%</option><option value="t3">销售税 7% + 5%增值税</option><option value="t4">所得税 15% + 5%增值税</option><option value="t5">不交纳税务</option></select></div></div>
                     </div>
                     <div class="input-row">
-                        <div class="input-group"><label>基础税率</label><div class="input-wrapper"><input type="text" id="taxRateDisp" readonly placeholder="6"><span class="symbol">%</span></div></div>
-                        <div class="input-group"><label>附加增值税</label><div class="input-wrapper"><input type="text" id="vatRateDisp" readonly placeholder="0"><span class="symbol">%</span></div></div>
+                        <div class="input-group"><label>基础税率</label><div class="input-wrapper"><input type="text" id="taxRateDisp" readonly placeholder="6" style="text-align: left;"><span class="symbol">%</span></div></div>
+                        <div class="input-group"><label>附加增值税</label><div class="input-wrapper"><input type="text" id="vatRateDisp" readonly placeholder="0" style="text-align: left;"><span class="symbol">%</span></div></div>
                     </div>
-                    <div class="result-row"><div class="result-box res-light-amber" style="flex:1;"><label>核算 税额 (RUB)</label><div class="input-wrapper"><span class="symbol" style="color:#d97706;">₽</span><input type="text" id="taxRub" readonly placeholder="0" style="color:#b45309;"></div></div></div>
+                    <div class="result-row"><div class="result-box res-light-amber" style="flex:1;"><label>核算 税额 (RUB)</label><div class="input-wrapper"><span class="symbol" style="color:#d97706;">₽</span><input type="text" id="taxRub" readonly placeholder="0" style="color:#b45309; text-align: left;"></div></div></div>
                 </div>
             </div>
 
             <div class="col-right">
-                
                 <div id="wb-right-engine">
                     <div class="card" id="wb-module-2">
                         <h2 class="card-title"><div class="card-title-indicator bg-emerald"></div>WB 平台费用板块</h2>
@@ -216,13 +219,11 @@
                                 <label>本地化指数</label>
                                 <div class="select-wrapper">
                                     <select id="wb_locIndex" onchange="calculateAll()">
-                                        <option value="95-100">95-100</option><option value="90-94">90-94</option><option value="85-89">85-89</option>
-                                        <option value="80-84">80-84</option><option value="75-79">75-79</option><option value="70-74">70-74</option>
-                                        <option value="65-69">65-69</option><option value="60-64">60-64</option><option value="55-59">55-59</option>
-                                        <option value="50-54">50-54</option><option value="45-49">45-49</option><option value="40-44">40-44</option>
-                                        <option value="35-39">35-39</option><option value="30-34">30-34</option><option value="25-29">25-29</option>
-                                        <option value="20-24">20-24</option><option value="15-19">15-19</option><option value="10-14">10-14</option>
-                                        <option value="5-9">5-9</option><option value="0-4">0-4</option><option value="none">不计算</option>
+                                        <option value="95-100">95-100</option><option value="90-94">90-94</option><option value="85-89">85-89</option><option value="80-84">80-84</option>
+                                        <option value="75-79">75-79</option><option value="70-74">70-74</option><option value="65-69">65-69</option><option value="60-64">60-64</option>
+                                        <option value="55-59">55-59</option><option value="50-54">50-54</option><option value="45-49">45-49</option><option value="40-44">40-44</option>
+                                        <option value="35-39">35-39</option><option value="30-34">30-34</option><option value="25-29">25-29</option><option value="20-24">20-24</option>
+                                        <option value="15-19">15-19</option><option value="10-14">10-14</option><option value="5-9">5-9</option><option value="0-4">0-4</option><option value="none">不计算</option>
                                     </select>
                                 </div>
                             </div>
@@ -235,9 +236,9 @@
                             <div class="input-group"><label>签收率</label><div class="input-wrapper"><input type="number" id="wb_deliveryRate" placeholder="100" oninput="calculateAll()"><span class="symbol">%</span></div></div>
                         </div>
                         <div class="result-row">
-                            <div class="result-box res-teal-light res-small"><label>去程分拣</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_logisticsFee" readonly placeholder="0"></div></div>
-                            <div class="result-box res-teal-light res-small"><label>全程配送(含系数+KRP)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_totalJourney" readonly placeholder="0"></div></div>
-                            <div class="result-box res-teal-light res-small"><label>逆向处理</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_reverseFee" readonly placeholder="0"></div></div>
+                            <div class="result-box res-teal-light res-small"><label>去程分拣</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_logisticsFee" readonly placeholder="0" style="text-align: left;"></div></div>
+                            <div class="result-box res-teal-light res-small"><label>全程配送(含系数+KRP)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_totalJourney" readonly placeholder="0" style="text-align: left;"></div></div>
+                            <div class="result-box res-teal-light res-small"><label>逆向处理</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_reverseFee" readonly placeholder="0" style="text-align: left;"></div></div>
                         </div>
                         <div class="result-row">
                             <div class="result-box res-dark-teal res-small"><label>物流总资费(均摊概率)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_totalLogisticsCost" readonly placeholder="0"></div></div>
@@ -249,13 +250,13 @@
                             <div class="input-group"><label>仓储 每L/天</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="wb_storagePerL" placeholder="0.00" oninput="calculateAll()"></div></div>
                         </div>
                         <div class="result-row">
-                            <div class="result-box res-orange res-small"><label>广告其它费</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_adFee" readonly placeholder="0"></div></div>
-                            <div class="result-box res-orange res-small"><label>无法均摊(1%)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_unallocatedFee" readonly placeholder="0"></div></div>
-                            <div class="result-box res-orange res-small"><label>FBW存储(30天)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_fbwStorageFee" readonly placeholder="0"></div></div>
+                            <div class="result-box res-orange res-small"><label>广告其它费</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_adFee" readonly placeholder="0" style="text-align: left;"></div></div>
+                            <div class="result-box res-orange res-small"><label>无法均摊(1%)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_unallocatedFee" readonly placeholder="0" style="text-align: left;"></div></div>
+                            <div class="result-box res-orange res-small"><label>FBW存储(30天)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_fbwStorageFee" readonly placeholder="0" style="text-align: left;"></div></div>
                         </div>
                         <div class="result-row" style="background:#fef2f2; padding: 1rem; border-radius:1rem; margin-top:0.5rem;">
-                            <div class="result-box" style="padding:0; background:transparent;"><label style="color:#b91c1c;">WB 扣除总额</label><div class="input-wrapper"><span class="symbol" style="color:#dc2626; font-size:1.5rem;">₽</span><input type="text" id="wb_wbTotalDeduction" readonly placeholder="0" style="color:#dc2626; font-size:2rem;"></div></div>
-                            <div class="result-box" style="padding:0; background:transparent; justify-content:center;"><label style="color:#b91c1c;">WB 费用占比</label><div class="input-wrapper"><input type="text" id="wb_wbDeductionRatio" readonly placeholder="0.00" style="color:#dc2626;"><span class="symbol" style="color:#dc2626;">%</span></div></div>
+                            <div class="result-box" style="padding:0; background:transparent;"><label style="color:#b91c1c;">WB 扣除总额</label><div class="input-wrapper"><span class="symbol" style="color:#dc2626; font-size:1.5rem;">₽</span><input type="text" id="wb_wbTotalDeduction" readonly placeholder="0" style="color:#dc2626; font-size:2rem; text-align: left;"></div></div>
+                            <div class="result-box" style="padding:0; background:transparent; justify-content:center;"><label style="color:#b91c1c;">WB 费用占比</label><div class="input-wrapper"><input type="text" id="wb_wbDeductionRatio" readonly placeholder="0.00" style="color:#dc2626; text-align: left;"><span class="symbol" style="color:#dc2626;">%</span></div></div>
                         </div>
                     </div>
                 </div>
@@ -365,284 +366,14 @@
 </div>
 
 <script>
-// ==================== 密码锁验证逻辑 ====================
-// 在这里修改您的默认密码 (当前为 888888)
-const SYSTEM_PASSWORD = "20250623";
-
-function verifyPassword() {
-    let input = document.getElementById('auth-pwd').value;
-    if (input === SYSTEM_PASSWORD) {
-        document.getElementById('auth-overlay').style.display = 'none';
-        let mainContent = document.getElementById('main-content');
-        mainContent.style.filter = 'none';
-        mainContent.style.pointerEvents = 'auto';
-        mainContent.style.userSelect = 'auto';
-    } else {
-        document.getElementById('auth-error').style.display = 'block';
-    }
-}
-
-// ==================== 核心参数字典 ====================
-const wbLocMap = {
-    "95-100": { reg: 0.5, krp: 0.00 }, "90-94":  { reg: 0.65, krp: 0.00 }, "85-89":  { reg: 0.75, krp: 0.00 }, "80-84":  { reg: 0.85, krp: 0.00 },
-    "75-79":  { reg: 0.95, krp: 0.00 }, "70-74":  { reg: 1.0, krp: 0.00 }, "65-69":  { reg: 1.0, krp: 0.00 }, "60-64":  { reg: 1.0, krp: 0.00 },
-    "55-59":  { reg: 1.05, krp: 0.02 }, "50-54":  { reg: 1.15, krp: 0.0205 }, "45-49":  { reg: 1.25, krp: 0.0205 }, "40-44":  { reg: 1.35, krp: 0.021 },
-    "35-39":  { reg: 1.45, krp: 0.021 }, "30-34":  { reg: 1.55, krp: 0.0215 }, "25-29":  { reg: 1.65, krp: 0.022 }, "20-24":  { reg: 1.75, krp: 0.0225 },
-    "15-19":  { reg: 1.85, krp: 0.023 }, "10-14":  { reg: 1.9, krp: 0.0235 }, "5-9":    { reg: 1.95, krp: 0.0245 }, "0-4":    { reg: 2.0, krp: 0.025 },
-    "none":   { reg: 1.0, krp: 0.00 }
-};
-const ozonCrossMarkupRate = {"Алматы":0.06,"Армения":0,"Астана":0.06,"Беларусь":0.06,"Воронеж":0.08,"Дальний Восток":0,"Екатеринбург":0.08,"Казань":0.08,"Калининград":0.08,"Краснодар":0.08,"Красноярск":0,"Кыргызстан":0,"Махачкала":0.08,"Москва, МО и Дальние регионы":0.08,"Невинномысск":0.08,"Новосибирск":0,"Омск":0.12,"Оренбург":0.12,"Пермь":0.12,"Ростов":0,"Самара":0.12,"Санкт-Петербург и СЗО":0.08,"Саратов":0.08,"Тверь":0.08,"Тюмень":0.08,"Узбекистан":0,"Уфа":0.08,"Ярославль":0.08};
-const taxMap = {"t1":{base:6,vat:0,type:'sales'},"t2":{base:15,vat:0,type:'profit'},"t3":{base:7,vat:5,type:'sales'},"t4":{base:15,vat:5,type:'profit'},"t5":{base:0,vat:0,type:'sales'}};
-const templateFields = ['exchangeRate','taxSystem','lossRate','wb_discount','wb_commissionRate','wb_shippingMethod','wb_locIndex','wb_baseRate','wb_over1LRate','wb_fbwMultiplier','wb_deliveryRate','wb_adRate','wb_storagePerL','ozon_discount','ozon_commissionRate','ozon_shippingMethod','ozon_fromCluster','ozon_toCluster','ozon_deliveryRate','ozon_lastMile','ozon_processing','ozon_returnProcessing','ozon_adRate','ozon_storagePerL'];
-let currentEditingId = null, currentPlatform = 'WB';
-
-function getData(k){try{let r=JSON.parse(localStorage.getItem(k));return(r&&typeof r==='object'&&!Array.isArray(r))?r:{}}catch(e){return{}}}
-function getArrayData(k){try{let r=JSON.parse(localStorage.getItem(k));return Array.isArray(r)?r:[]}catch(e){return[]}}
-function setData(k,v){localStorage.setItem(k,JSON.stringify(v))}
-function getVal(i){let e=document.getElementById(i);return e?(parseFloat(e.value)||0):0}
-function setFmt(i,v,f=!1){let e=document.getElementById(i);if(e){e.value=v!==0?(f?v.toFixed(2):Math.round(v).toLocaleString()):'0'}return v}
-
-function getOzonVolBandStringDynamically(v){
-    let b=getArrayData('ozon_vol_bands');
-    if(b.length>0){for(let i=0;i<b.length;i++){if(v<=b[i].max)return b[i].key;}return b[b.length-1].key;}
-    if(v<=0.2)return"0-0,200 л";if(v<=0.4)return"0,201-0,4 л";if(v<=0.6)return"0,401-0,6 л";if(v<=0.8)return"0,601-0,8 л";if(v<=1.0)return"0,801-1 л";if(v<=1.25)return"1,001-1,25 л";if(v<=1.5)return"1,251-1,5 л";if(v<=1.75)return"1,501-1,75 л";if(v<=2.0)return"1,751-2 л";if(v<=3.0)return"2,001-3 л";if(v<=4.0)return"3,001-4 л";if(v<=5.0)return"4,001-5 л";let u=Math.ceil(v);return`${u-1},001-${u} л`;
-}
-
-function getOzonSortFee(v,p,f,t){
-    let vs=getOzonVolBandStringDynamically(v),m=getData('ozon_matrix_cache'),ih=p>300;
-    if(m&&m[f]&&m[f][t]&&m[f][t][vs])return ih?m[f][t][vs].o:m[f][t][vs].u;
-    if(v<=0.2)return ih?56:17.28;if(v<=0.4)return ih?63:19.32;if(v<=0.6)return ih?67:21.35;if(v<=0.8)return ih?67:22.37;if(v<=1.0)return ih?67:23.38;if(v<=1.25)return ih?71:25.42;if(v<=1.5)return ih?74:26.43;if(v<=1.75)return ih?74:27.45;if(v<=2.0)return ih?74:29.48;if(v<=3.0)return ih?74:31.52;if(v<=4.0)return ih?78:35.58;let x=Math.ceil(v-4);return ih?(78+x*12):(35.58+x*10);
-}
-
-function updateOzonDbStatus(){
-    let s=document.getElementById('ozonDbStatus'),m=getData('ozon_matrix_cache');
-    if(!s)return;
-    if(m&&Object.keys(m).length>0){s.innerHTML='<span class="status-dot dot-green"></span>已加载全量集群费率字典 (100%精准匹配)';s.style.color='#10b981';}
-    else{s.innerHTML='<span class="status-dot dot-yellow"></span>未导入 (当前使用系统底线默认价)';s.style.color='#f59e0b';}
-}
-
-function parsePastedExcel(){
-    let t=document.getElementById('csvPasteArea').value;if(!t||!t.trim()){alert('请输入或粘贴 Excel 中的数据！');return;}
-    try{
-        let ls=t.split(/\r?\n/),m={},vb=[],vs=new Set(),c=0,dl='\t';
-        if(t.indexOf('\t')===-1&&t.indexOf(',')!==-1)dl=',';if(t.indexOf('\t')===-1&&t.indexOf(';')!==-1)dl=';';
-        function cleanCells(s){return s.split(dl).map(x=>x.replace(/^"|"$/g,'').trim());}
-        let hr=-1,vi=-1,fi=-1,ti=-1,ui=-1,oi=-1;
-        for(let i=0;i<Math.min(20,ls.length);i++){
-            let pt=cleanCells(ls[i]),v=pt.findIndex(p=>p.includes('Объём')||p.includes('Объем'));
-            if(v!==-1){vi=v;fi=pt.findIndex(p=>p.includes('отправления'));ti=pt.findIndex(p=>p.includes('доставки'));ui=pt.findIndex(p=>p.includes('до 300'));oi=pt.findIndex(p=>p.includes('свыше 300'));hr=i;break;}
-        }
-        if(hr===-1||fi===-1||ti===-1){alert('解析失败：未能找到核心表头。');return;}
-        for(let i=hr+1;i<ls.length;i++){
-            if(!ls[i].trim())continue;let pt=cleanCells(ls[i]);if(pt.length<=Math.max(vi,fi,ti,ui,oi))continue;
-            let v_s=pt[vi],f_c=pt[fi],t_c=pt[ti];if(!f_c||!t_c||!v_s)continue;
-            let pus=pt[ui]?pt[ui].replace(/,/g,'.'):'0',pos=pt[oi]?pt[oi].replace(/,/g,'.'):'0',pu=parseFloat(pus.replace(/\s/g,''))||0,po=parseFloat(pos.replace(/\s/g,''))||0;
-            if(!m[f_c])m[f_c]={};if(!m[f_c][t_c])m[f_c][t_c]={};m[f_c][t_c][v_s]={u:pu,o:po};c++;
-            if(!vs.has(v_s)){vs.add(v_s);let pv=v_s.split('-');if(pv.length===2){let ms=pv[1].replace('л','').replace(/,/g,'.').trim(),mv=parseFloat(ms);if(!isNaN(mv))vb.push({max:mv,key:v_s});}else if(v_s.includes('более')){vb.push({max:99999,key:v_s});}}
-        }
-        if(c>0){vb.sort((a,b)=>a.max-b.max);setData('ozon_vol_bands',vb);setData('ozon_matrix_cache',m);alert(`解析成功！提取了 ${c} 条精准路线。`);document.getElementById('csvPasteArea').value='';document.getElementById('pasteModal').style.display='none';updateOzonDbStatus();calculateAll();}
-        else{alert('有效行数为0。');}
-    }catch(e){alert('错误：'+e.message);}
-}
-
-function calculateAll() {
-    try {
-        let productCost = getVal('productCost');
-        let exchangeRate = getVal('exchangeRate');
-        let length = getVal('length');
-        let width = getVal('width');
-        let height = getVal('height');
-        
-        let volume = (length * width * height) / 1000;
-        setFmt('volume', volume, true);
-        
-        let unitCost = productCost * exchangeRate;
-        setFmt('unitCost', unitCost);
-
-        let finalPrice = 0;
-        let finalTotalDeduction = 0;
-
-        if (currentPlatform === 'WB') {
-            let price = getVal('wb_price');
-            finalPrice = price;
-
-            let buyerPrice = price * (1 - getVal('wb_discount') / 100);
-            setFmt('wb_buyerPrice', buyerPrice);
-            
-            let wbCommissionFee = price * (getVal('wb_commissionRate') / 100);
-            setFmt('wb_commissionFee', wbCommissionFee);
-            
-            let bankFee = price * 0.015;
-            setFmt('wb_bankFee', bankFee);
-
-            let locIndexStr = document.getElementById('wb_locIndex').value;
-            let locInfo = wbLocMap[locIndexStr] || { reg: 1.0, krp: 0 };
-            document.getElementById('wb_krpRatio').value = (locInfo.krp * 100).toFixed(2);
-            
-            let fbwMultiplier = getVal('wb_fbwMultiplier') || 1;
-            let shippingMethod = document.getElementById('wb_shippingMethod').value;
-            let baseRate = getVal('wb_baseRate');
-            let over1LRate = getVal('wb_over1LRate');
-            
-            let logisticsFee = 0;
-            if (volume > 0 && volume < 1) {
-                let smallVolBase = volume <= 0.2 ? 23 : volume <= 0.4 ? 26 : volume <= 0.6 ? 29 : 30;
-                logisticsFee = volume * smallVolBase;
-            } else {
-                let extraVolume = volume > 1 ? volume - 1 : 0;
-                logisticsFee = baseRate + (extraVolume * over1LRate);
-            }
-            if (shippingMethod === 'FBW') logisticsFee *= fbwMultiplier;
-            setFmt('wb_logisticsFee', logisticsFee);
-
-            let reverseFee = baseRate + ((volume > 1 ? volume - 1 : 0) * over1LRate);
-            setFmt('wb_reverseFee', reverseFee);
-            
-            let totalJourney = (locInfo.reg * logisticsFee) + (price * locInfo.krp);
-            setFmt('wb_totalJourney', totalJourney);
-            
-            let deliveryRate = getVal('wb_deliveryRate');
-            if (deliveryRate <= 0) deliveryRate = 100;
-            
-            let totalLogisticsCost = (100 / deliveryRate) * totalJourney + ((100 / deliveryRate) - 1) * reverseFee;
-            setFmt('wb_totalLogisticsCost', totalLogisticsCost);
-            document.getElementById('wb_logRatio').value = price > 0 ? ((totalLogisticsCost / price) * 100).toFixed(2) : '0.00';
-
-            let adFee = price * (getVal('wb_adRate') / 100);
-            setFmt('wb_adFee', adFee);
-            let unallocatedFee = price * 0.01;
-            setFmt('wb_unallocatedFee', unallocatedFee);
-            let fbwStorageFee = getVal('wb_storagePerL') * fbwMultiplier * volume * 30;
-            setFmt('wb_fbwStorageFee', fbwStorageFee);
-
-            finalTotalDeduction = wbCommissionFee + bankFee + totalLogisticsCost + adFee + unallocatedFee + fbwStorageFee;
-            setFmt('wb_wbTotalDeduction', finalTotalDeduction);
-            document.getElementById('wb_wbDeductionRatio').value = price > 0 ? ((finalTotalDeduction / price) * 100).toFixed(2) : '0.00';
-
-        } 
-        else if (currentPlatform === 'Ozon') {
-            let price = getVal('ozon_price');
-            finalPrice = price;
-
-            let buyerPrice = price * (1 - getVal('ozon_discount') / 100);
-            setFmt('ozon_buyerPrice', buyerPrice); 
-            
-            let ozonCommissionFee = price * (getVal('ozon_commissionRate') / 100);
-            setFmt('ozon_commissionFee', ozonCommissionFee);
-            
-            let bankFee = price * 0.015;
-            setFmt('ozon_bankFee', bankFee);
-
-            let method = document.getElementById('ozon_shippingMethod').value;
-            let fromC = document.getElementById('ozon_fromCluster').value;
-            let toC = document.getElementById('ozon_toCluster').value;
-            
-            let elCross = document.getElementById('ozon_crossMarkup');
-            let elProc = document.getElementById('ozon_processing');
-            if (elCross && elCross.parentElement && elCross.parentElement.parentElement) elCross.parentElement.parentElement.style.opacity = method === 'FBS' ? '0.3' : '1';
-            if (elProc && elProc.parentElement && elProc.parentElement.parentElement) elProc.parentElement.parentElement.style.opacity = method === 'FBO' ? '0.3' : '1';
-
-            let fwdSort = getOzonSortFee(volume, price, fromC, toC);
-            setFmt('ozon_fwdSort', fwdSort);
-
-            let crossMarkup = 0;
-            if (method === 'FBO' && fromC !== toC) {
-                let rate = ozonCrossMarkupRate[toC] || 0;
-                crossMarkup = price * rate;
-            }
-            setFmt('ozon_crossMarkup', crossMarkup);
-
-            let lastMile = getVal('ozon_lastMile');
-            let processing = method === 'FBS' ? getVal('ozon_processing') : 0; 
-            let returnProc = getVal('ozon_returnProcessing');
-
-            let forwardTotal = fwdSort + crossMarkup + processing + lastMile;
-            setFmt('ozon_forwardTotal', forwardTotal);
-
-            let revSort = getOzonSortFee(volume, price, toC, toC); 
-            let reverseTotal = returnProc + revSort; 
-            setFmt('ozon_reverseTotal', reverseTotal);
-
-            let deliveryRate = getVal('ozon_deliveryRate');
-            if (deliveryRate <= 0) deliveryRate = 100;
-            let totalLogisticsCost = (100 / deliveryRate) * forwardTotal + ((100 / deliveryRate) - 1) * reverseTotal;
-            setFmt('ozon_totalLogisticsCost', totalLogisticsCost);
-            
-            let ozLogRatEl = document.getElementById('ozon_logRatio');
-            if (ozLogRatEl) ozLogRatEl.value = price > 0 ? ((totalLogisticsCost / price) * 100).toFixed(2) : '0.00';
-
-            let adFee = price * (getVal('ozon_adRate') / 100);
-            setFmt('ozon_adFee', adFee);
-            let unallocatedFee = price * 0.01;
-            setFmt('ozon_unallocatedFee', unallocatedFee);
-            let fboStorageFee = getVal('ozon_storagePerL') * volume * 30; 
-            setFmt('ozon_fboStorageFee', fboStorageFee);
-
-            finalTotalDeduction = ozonCommissionFee + bankFee + totalLogisticsCost + adFee + unallocatedFee + fboStorageFee;
-            setFmt('ozon_wbTotalDeduction', finalTotalDeduction); 
-            let ozDedRatEl = document.getElementById('ozon_wbDeductionRatio');
-            if (ozDedRatEl) ozDedRatEl.value = price > 0 ? ((finalTotalDeduction / price) * 100).toFixed(2) : '0.00';
-        }
-
-        let taxOpt = taxMap[document.getElementById('taxSystem').value];
-        document.getElementById('taxRateDisp').value = taxOpt.base;
-        document.getElementById('vatRateDisp').value = taxOpt.vat;
-        
-        let baseTaxRub = 0;
-        if (taxOpt.type === 'sales') {
-            baseTaxRub = finalPrice * (taxOpt.base / 100);
-        } else if (taxOpt.type === 'profit') {
-            let taxProfit = finalPrice - finalTotalDeduction;
-            baseTaxRub = taxProfit > 0 ? taxProfit * (taxOpt.base / 100) : 0;
-        }
-        let vatRub = finalPrice * (taxOpt.vat / 100);
-        let taxRub = baseTaxRub + vatRub;
-        setFmt('taxRub', taxRub);
-
-        let finalMiscFee = finalPrice * 0.03;
-        setFmt('finalMiscFee', finalMiscFee);
-        
-        let lossBase = finalPrice - finalTotalDeduction - taxRub;
-        let lossRub = lossBase > 0 ? lossBase * (getVal('lossRate') / 100) : 0;
-        setFmt('lossRub', lossRub);
-        
-        let totalUnitCost = unitCost + finalTotalDeduction + taxRub + finalMiscFee + lossRub;
-        setFmt('totalUnitCost', totalUnitCost);
-        
-        let profitRub = finalPrice - totalUnitCost;
-        setFmt('profitRub', profitRub);
-        
-        let profitRmb = exchangeRate > 0 ? profitRub / exchangeRate : 0;
-        setFmt('profitRmb', profitRmb, true);
-
-        let netMargin = finalPrice > 0 ? (profitRub / finalPrice) * 100 : 0;
-        document.getElementById('netMargin').value = netMargin.toFixed(2);
-        
-        let roiRate = unitCost > 0 ? (profitRub / unitCost) * 100 : 0;
-        document.getElementById('roiRate').value = roiRate.toFixed(2);
-
-        let isLoss = profitRub < 0;
-        let profitRubBox = document.getElementById('profitRubBox');
-        if (profitRubBox) profitRubBox.className = 'result-box ' + (isLoss ? 'profit-negative' : 'res-dark-indigo');
-        
-        let profitRmbBox = document.getElementById('profitRmbBox');
-        if (profitRmbBox) profitRmbBox.className = 'result-box ' + (isLoss ? 'profit-negative' : 'res-dark-rose');
-        
-        let marginBox = document.getElementById('marginBox');
-        let marginBar = document.getElementById('marginBar');
-        if (marginBox) marginBox.className = 'progress-box ' + (isLoss ? 'text-red-alert' : '');
-        if (marginBar) { marginBar.className = 'progress-bar ' + (isLoss ? 'bar-red' : 'bar-blue'); marginBar.style.width = Math.min(Math.abs(netMargin), 100) + '%'; }
-        
-        let roiBox = document.getElementById('roiBox');
-        let roiBar = document.getElementById('roiBar');
-        if (roiBox) roiBox.className = 'progress-box ' + (isLoss ? 'text-red-alert' : '');
-        if (roiBar) { roiBar.className = 'progress-bar ' + (isLoss ? 'bar-red' : 'bar-green'); roiBar.style.width = Math.min(Math.abs(roiRate), 100) + '%'; }
-    } catch (err) { console.error(err); }
-}
-
-function loadTemplateDropdown(){let t=getData('erp_templates'),s=document.getElementById('templateSelect');if(!s)return;s.innerHTML='<option value="">-- 定价通用模板 --</option>';for(let k in t){let o=document.createElement('option');o.value=k;o.textContent=k;s.appendChild(o);}}
-function saveAsTemplate(){let n=prompt("请输入新模板名称:");if(!n||!n.trim())return;n=n.trim();let td={},ts=getData('erp_templates');templateFields.forEach(id=>{let e=document.getElementById(id);td[id]=e?e.value:'';});ts[n]=td;setData('erp_templates',ts);loadTemplateDropdown();let s=document.getElementById('templateSelect');if(s)s.value=n;alert('模板保存成功！');}
-function applyTemplate(){let s=document.getElementById('templateSelect');if(!s)return;let n=s.value;if(!n){alert('请先选择模板！');return;}let ts=getData('erp_templates'),td=ts[n];if(td){for(let k in td){let e=document.getElementById(k);if(e)e.value=td[k];}calculateAll();}}
-function deleteTemplate(){let s=document.getElementById('templateSelect');if(!s)return;let n=s.value;if(!n)return;if(confirm('确定删除模板吗？')){let ts=getData('erp_templates');delete ts[n];setData('erp_templates',ts);loadTemplateDropdown();}}
-function showDashboard(){let dv=document.getElementById('dashboardView');if(dv)dv.style.display='block';let dtv=document.getElementById('detailView');if(dtv)dtv.style.display='none';let da=document.getElementById('dashboardActions');if(da)da.style.display='flex';renderTable();}
-function togglePlatformView(p){currentPlatform=p;let b=document.getElementById('currentPlatBadge');if(b
+// ==================== 密码锁设定 ====================
+const SYSTEM_PASSWORD="20250623";function verifyPassword(){let i=document.getElementById('auth-pwd').value;if(i===SYSTEM_PASSWORD){document.getElementById('auth-overlay').style.display='none';let m=document.getElementById('main-content');m.style.filter='none';m.style.pointerEvents='auto';m.style.userSelect='auto'}else{document.getElementById('auth-error').style.display='block'}}
+// ==================== 核心强混淆引擎 ====================
+const _wM={"95-100":{r:0.5,k:0},"90-94":{r:0.65,k:0},"85-89":{r:0.75,k:0},"80-84":{r:0.85,k:0},"75-79":{r:0.95,k:0},"70-74":{r:1,k:0},"65-69":{r:1,k:0},"60-64":{r:1,k:0},"55-59":{r:1.05,k:0.02},"50-54":{r:1.15,k:0.0205},"45-49":{r:1.25,k:0.0205},"40-44":{r:1.35,k:0.021},"35-39":{r:1.45,k:0.021},"30-34":{r:1.55,k:0.0215},"25-29":{r:1.65,k:0.022},"20-24":{r:1.75,k:0.0225},"15-19":{r:1.85,k:0.023},"10-14":{r:1.9,k:0.0235},"5-9":{r:1.95,k:0.0245},"0-4":{r:2,k:0.025},none:{r:1,k:0}};const _oR={"Алматы":0.06,"Армения":0,"Астана":0.06,"Беларусь":0.06,"Воронеж":0.08,"Дальний Восток":0,"Екатеринбург":0.08,"Казань":0.08,"Калининград":0.08,"Краснодар":0.08,"Красноярск":0,"Кыргызстан":0,"Махачкала":0.08,"Москва, МО и Дальние регионы":0.08,"Невинномысск":0.08,"Новосибирск":0,"Омск":0.12,"Оренбург":0.12,"Пермь":0.12,"Ростов":0,"Самара":0.12,"Санкт-Петербург и СЗО":0.08,"Саратов":0.08,"Тверь":0.08,"Тюмень":0.08,"Узбекистан":0,"Уфа":0.08,"Ярославль":0.08};const _tM={t1:{b:6,v:0,t:'s'},t2:{b:15,v:0,t:'p'},t3:{b:7,v:5,t:'s'},t4:{b:15,v:5,t:'p'},t5:{b:0,v:0,t:'s'}};const _tF=['exchangeRate','taxSystem','lossRate','wb_discount','wb_commissionRate','wb_shippingMethod','wb_locIndex','wb_baseRate','wb_over1LRate','wb_fbwMultiplier','wb_deliveryRate','wb_adRate','wb_storagePerL','ozon_discount','ozon_commissionRate','ozon_shippingMethod','ozon_fromCluster','ozon_toCluster','ozon_deliveryRate','ozon_lastMile','ozon_processing','ozon_returnProcessing','ozon_adRate','ozon_storagePerL'];let _cI=null,_cP='WB';
+function _g(k){try{let r=JSON.parse(localStorage.getItem(k));return(r&&typeof r==='object'&&!Array.isArray(r))?r:{}}catch(e){return{}}}function _ga(k){try{let r=JSON.parse(localStorage.getItem(k));return Array.isArray(r)?r:[]}catch(e){return[]}}function _s(k,v){localStorage.setItem(k,JSON.stringify(v))}function _v(i){let e=document.getElementById(i);return e?(parseFloat(e.value)||0):0}function _f(i,v,f=!1){let e=document.getElementById(i);if(e)e.value=v!==0?(f?v.toFixed(2):Math.round(v).toLocaleString()):'0';return v}function _gb(v){let b=_ga('ozon_vol_bands');if(b.length>0){for(let i=0;i<b.length;i++){if(v<=b[i].max)return b[i].key}return b[b.length-1].key}if(v<=0.2)return"0-0,200 л";if(v<=0.4)return"0,201-0,4 л";if(v<=0.6)return"0,401-0,6 л";if(v<=0.8)return"0,601-0,8 л";if(v<=1.0)return"0,801-1 л";if(v<=1.25)return"1,001-1,25 л";if(v<=1.5)return"1,251-1,5 л";if(v<=1.75)return"1,501-1,75 л";if(v<=2.0)return"1,751-2 л";if(v<=3.0)return"2,001-3 л";if(v<=4.0)return"3,001-4 л";if(v<=5.0)return"4,001-5 л";let u=Math.ceil(v);return`${u-1},001-${u} л`}function _gf(v,p,f,t){let vs=_gb(v),m=_g('ozon_matrix_cache'),ih=p>300;if(m&&m[f]&&m[f][t]&&m[f][t][vs])return ih?m[f][t][vs].o:m[f][t][vs].u;if(v<=0.2)return ih?56:17.28;if(v<=0.4)return ih?63:19.32;if(v<=0.6)return ih?67:21.35;if(v<=0.8)return ih?67:22.37;if(v<=1.0)return ih?67:23.38;if(v<=1.25)return ih?71:25.42;if(v<=1.5)return ih?74:26.43;if(v<=1.75)return ih?74:27.45;if(v<=2.0)return ih?74:29.48;if(v<=3.0)return ih?74:31.52;if(v<=4.0)return ih?78:35.58;let x=Math.ceil(v-4);return ih?(78+x*12):(35.58+x*10)}function _ud(){let s=document.getElementById('ozonDbStatus'),m=_g('ozon_matrix_cache');if(!s)return;if(m&&Object.keys(m).length>0){s.innerHTML='<span class="status-dot dot-green"></span>已加载全量集群费率字典 (100%精准匹配)';s.style.color='#10b981'}else{s.innerHTML='<span class="status-dot dot-yellow"></span>未导入 (当前使用系统底线默认价)';s.style.color='#f59e0b'}}
+function parsePastedExcel(){let t=document.getElementById('csvPasteArea').value;if(!t||!t.trim()){alert('请输入或粘贴 Excel 中的数据！');return}try{let ls=t.split(/\r?\n/),m={},vb=[],vs=new Set(),c=0,dl='\t';if(t.indexOf('\t')===-1&&t.indexOf(',')!==-1)dl=',';if(t.indexOf('\t')===-1&&t.indexOf(';')!==-1)dl=';';let cl=s=>s.split(dl).map(x=>x.replace(/^"|"$/g,'').trim()),hr=-1,vi=-1,fi=-1,ti=-1,ui=-1,oi=-1;for(let i=0;i<Math.min(20,ls.length);i++){let p=cl(ls[i]),x=p.findIndex(y=>y.includes('Объём')||y.includes('Объем'));if(x!==-1){vi=x;fi=p.findIndex(y=>y.includes('отправления'));ti=p.findIndex(y=>y.includes('доставки'));ui=p.findIndex(y=>y.includes('до 300'));oi=p.findIndex(y=>y.includes('свыше 300'));hr=i;break}}if(hr===-1||fi===-1||ti===-1){alert('解析失败：未能找到核心表头。');return}for(let i=hr+1;i<ls.length;i++){if(!ls[i].trim())continue;let p=cl(ls[i]);if(p.length<=Math.max(vi,fi,ti,ui,oi))continue;let vsr=p[vi],f_c=p[fi],t_c=pt=p[ti];if(!f_c||!t_c||!vsr)continue;let pus=p[ui]?p[ui].replace(/,/g,'.'):'0',pos=p[oi]?p[oi].replace(/,/g,'.'):'0',pu=parseFloat(pus.replace(/\s/g,''))||0,po=parseFloat(pos.replace(/\s/g,''))||0;if(!m[f_c])m[f_c]={};if(!m[f_c][t_c])m[f_c][t_c]={};m[f_c][t_c][vsr]={u:pu,o:po};c++;if(!vs.has(vsr)){vs.add(vsr);let pv=vsr.split('-');if(pv.length===2){let ms=pv[1].replace('л','').replace(/,/g,'.').trim(),mv=parseFloat(ms);if(!isNaN(mv))vb.push({max:mv,key:vsr})}else if(vsr.includes('более')){vb.push({max:99999,key:vsr})}}}if(c>0){vb.sort((a,b)=>a.max-b.max);_s('ozon_vol_bands',vb);_s('ozon_matrix_cache',m);alert(`解析成功！提取了 ${c} 条精准路线。`);document.getElementById('csvPasteArea').value='';document.getElementById('pasteModal').style.display='none';_ud();calculateAll()}else{alert('有效行数为0。')}}catch(e){alert('错误：'+e.message)}}
+function calculateAll(){try{let pc=_v('productCost'),er=_v('exchangeRate'),l=_v('length'),w=_v('width'),h=_v('height'),vol=(l*w*h)/1000;_f('volume',vol,!0);let uc=pc*er;_f('unitCost',uc);let fp=0,ftd=0;if(_cP==='WB'){let p=_v('wb_price');fp=p;let bp=p*(1-_v('wb_discount')/100);_f('wb_buyerPrice',bp);let cf=p*(_v('wb_commissionRate')/100);_f('wb_commissionFee',cf);let bkf=p*0.015;_f('wb_bankFee',bkf);let loc=_wM[document.getElementById('wb_locIndex').value]||{r:1,k:0},kel=document.getElementById('wb_krpRatio');if(kel)kel.value=(loc.k*100).toFixed(2);let fm=_v('wb_fbwMultiplier')||1,sm=document.getElementById('wb_shippingMethod').value,br=_v('wb_baseRate'),or=_v('wb_over1LRate'),lf=0;if(vol>0&&vol<1){let svb=vol<=0.2?23:vol<=0.4?26:vol<=0.6?29:30;lf=vol*svb}else{let ev=vol>1?vol-1:0;lf=br+(ev*or)}if(sm==='FBW')lf*=fm;_f('wb_logisticsFee',lf);let rf=br+((vol>1?vol-1:0)*or);_f('wb_reverseFee',rf);let tj=(loc.r*lf)+(p*loc.k);_f('wb_totalJourney',tj);let dr=_v('wb_deliveryRate');if(dr<=0)dr=100;let tlc=(100/dr)*tj+((100/dr)-1)*rf;_f('wb_totalLogisticsCost',tlc);let wlre=document.getElementById('wb_logRatio');if(wlre)wlre.value=p>0?((tlc/p)*100).toFixed(2):'0.00';let af=p*(_v('wb_adRate')/100);_f('wb_adFee',af);let uf=p*0.01;_f('wb_unallocatedFee',uf);let fsf=_v('wb_storagePerL')*fm*vol*30;_f('wb_fbwStorageFee',fsf);ftd=cf+bkf+tlc+af+uf+fsf;_f('wb_wbTotalDeduction',ftd);let wdre=document.getElementById('wb_wbDeductionRatio');if(wdre)wdre.value=p>0?((ftd/p)*100).toFixed(2):'0.00'}else if(_cP==='Ozon'){let p=_v('ozon_price');fp=p;let bp=p*(1-_v('ozon_discount')/100);_f('ozon_buyerPrice',bp);let cf=p*(_v('ozon_commissionRate')/100);_f('ozon_commissionFee',cf);let bkf=p*0.015;_f('ozon_bankFee',bkf);let md=document.getElementById('ozon_shippingMethod').value,fc=document.getElementById('ozon_fromCluster').value,tc=document.getElementById('ozon_toCluster').value,ecm=document.getElementById('ozon_crossMarkup'),ep=document.getElementById('ozon_processing');if(ecm&&ecm.parentElement&&ecm.parentElement.parentElement)ecm.parentElement.parentElement.style.opacity=md==='FBS'?'0.3':'1';if(ep&&ep.parentElement&&ep.parentElement.parentElement)ep.parentElement.parentElement.style.opacity=md==='FBO'?'0.3':'1';let fs=_gf(vol,p,fc,tc);_f('ozon_fwdSort',fs);let cm=0;if(md==='FBO'&&fc!==tc){let r=_oR[tc]||0;cm=p*r}_f('ozon_crossMarkup',cm);let lm=_v('ozon_lastMile'),pr=md==='FBS'?_v('ozon_processing'):0,rp=_v('ozon_returnProcessing'),ft=fs+cm+pr+lm;_f('ozon_forwardTotal',ft);let rs=_gf(vol,p,tc,tc),rt=rp+rs;_f('ozon_reverseTotal',rt);let dr=_v('ozon_deliveryRate');if(dr<=0)dr=100;let tlc=(100/dr)*ft+((100/dr)-1)*rt;_f('ozon_totalLogisticsCost',tlc);let olre=document.getElementById('ozon_logRatio');if(olre)olre.value=p>0?((tlc/p)*100).toFixed(2):'0.00';let af=p*(_v('ozon_adRate')/100);_f('ozon_adFee',af);let uf=p*0.01;_f('ozon_unallocatedFee',uf);let fsf=_v('ozon_storagePerL')*vol*30;_f('ozon_fboStorageFee',fsf);ftd=cf+bkf+tlc+af+uf+fsf;_f('ozon_wbTotalDeduction',ftd);let odre=document.getElementById('ozon_wbDeductionRatio');if(odre)odre.value=p>0?((ftd/p)*100).toFixed(2):'0.00'}let to=_tM[document.getElementById('taxSystem').value],trd=document.getElementById('taxRateDisp');if(trd)trd.value=to.b;let vrd=document.getElementById('vatRateDisp');if(vrd)vrd.value=to.v;let btr=0;if(to.t==='s'){btr=fp*(to.b/100)}else if(to.t==='p'){let tp=fp-ftd;btr=tp>0?tp*(to.b/100):0}let vr=fp*(to.v/100),tr=btr+vr;_f('taxRub',tr);let fmf=fp*0.03;_f('finalMiscFee',fmf);let lb=fp-ftd-tr,lr=lb>0?lb*(_v('lossRate')/100):0;_f('lossRub',lr);let tuc=uc+ftd+tr+fmf+lr;_f('totalUnitCost',tuc);let prb=fp-tuc;_f('profitRub',prb);let prm=er>0?prb/er:0;_f('profitRmb',prm,!0);let nm=fp>0?(prb/fp)*100:0,nme=document.getElementById('netMargin');if(nme)nme.value=nm.toFixed(2);let rr=uc>0?(prb/uc)*100:0,rre=document.getElementById('roiRate');if(rre)rre.value=rr.toFixed(2);let il=prb<0,prbb=document.getElementById('profitRubBox');if(prbb)prbb.className='result-box '+(il?'profit-negative':'res-dark-indigo');let prmb=document.getElementById('profitRmbBox');if(prmb)prmb.className='result-box '+(il?'profit-negative':'res-dark-rose');let mb=document.getElementById('marginBox'),mbr=document.getElementById('marginBar');if(mb)mb.className='progress-box '+(il?'text-red-alert':'');if(mbr){mbr.className='progress-bar '+(il?'bar-red':'bar-blue');mbr.style.width=Math.min(Math.abs(nm),100)+'%'}let rb=document.getElementById('roiBox'),rbr=document.getElementById('roiBar');if(rb)rb.className='progress-box '+(il?'text-red-alert':'');if(rbr){rbr.className='progress-bar '+(il?'bar-red':'bar-green');rbr.style.width=Math.min(Math.abs(rr),100)+'%'}}catch(e){console.error(e)}}
+function loadTemplateDropdown(){let t=_g('erp_templates'),s=document.getElementById('templateSelect');if(!s)return;s.innerHTML='<option value="">-- 定价通用模板 --</option>';for(let k in t){let o=document.createElement('option');o.value=k;o.textContent=k;s.appendChild(o)}}function saveAsTemplate(){let n=prompt("请输入新模板名称:");if(!n||!n.trim())return;n=n.trim();let td={},ts=_g('erp_templates');_tF.forEach(id=>{let e=document.getElementById(id);td[id]=e?e.value:''});ts[n]=td;_s('erp_templates',ts);loadTemplateDropdown();let s=document.getElementById('templateSelect');if(s)s.value=n;alert('模板保存成功！')}function applyTemplate(){let s=document.getElementById('templateSelect');if(!s)return;let n=s.value;if(!n){alert('请先选择模板！');return}let ts=_g('erp_templates'),td=ts[n];if(td){for(let k in td){let e=document.getElementById(k);if(e)e.value=td[k]}calculateAll()}}function deleteTemplate(){let s=document.getElementById('templateSelect');if(!s)return;let n=s.value;if(!n)return;if(confirm('确定删除模板吗？')){let ts=_g('erp_templates');delete ts[n];_s('erp_templates',ts);loadTemplateDropdown()}}function showDashboard(){let dv=document.getElementById('dashboardView');if(dv)dv.style.display='block';let dtv=document.getElementById('detailView');if(dtv)dtv.style.display='none';let da=document.getElementById('dashboardActions');if(da)da.style.display='flex';renderTable()}function togglePlatformView(p){_cP=p;let b=document.getElementById('currentPlatBadge');if(b){b.innerText=p;b.className='plat-tag '+(p==='WB'?'tag-wb':'tag-ozon')}let wl=document.getElementById('wb-left-engine');if(wl)wl.style.display=(p==='WB')?'block':'none';let wr=document.getElementById('wb-right-engine');if(wr)wr.style.display=(p==='WB')?'block':'none';let ol=document.getElementById('ozon-left-engine');if(ol)ol.style.display=(p==='Ozon')?'block':'none';let or=document.getElementById('ozon-right-engine');if(or)or.style.display=(p==='Ozon')?'block':'none'}function createNewProduct(p){_cI=Date.now().toString();togglePlatformView(p||'WB');document.querySelectorAll('input[type="number"], input[type="text"]').forEach(e=>{if(e.id!=='skuFilter'&&e.id!=='csvPasteArea'&&e.id!=='auth-pwd')e.value=''});let si=document.getElementById('skuName');if(si)si.value='';let ts=document.getElementById('templateSelect');if(ts)ts.value='';calculateAll();let dv=document.getElementById('dashboardView');if(dv)dv.style.display='none';let dtv=document.getElementById('detailView');if(dtv)dtv.style.display='block';let da=document.getElementById('dashboardActions');if(da)da.style.display='none'}function editProduct(id){_cI=id;let ps=_g('erp_products'),pd=ps[id];if(pd){togglePlatformView(pd.platform||'WB');let si=document.getElementById('skuName');if(si)si.value=pd.sku||'';for(let k in pd.fields){let e=document.getElementById(k);if(e)e.value=pd.fields[k]}let ts=document.getElementById('templateSelect');if(ts)ts.value='';calculateAll();let dv=document.getElementById('dashboardView');if(dv)dv.style.display='none';let dtv=document.getElementById('detailView');if(dtv)dtv.style.display='block';let da=document.getElementById('dashboardActions');if(da)da.style.display='none'}}function deleteProduct(id){if(confirm('确定删除该产品吗？')){let ps=_g('erp_products');delete ps[id];_s('erp_products',ps);renderTable()}}function saveProduct(){try{let se=document.getElementById('skuName');if(!se||!se.value.trim()){alert('提示：请先在上方填写 SKU 或产品名称！');return}let sn=se.value.trim(),fd={};_tF.forEach(id=>{let e=document.getElementById(id);fd[id]=e?e.value:''});['productCost','exchangeRate','length','width','height','wb_price','ozon_price'].forEach(id=>{let e=document.getElementById(id);if(e)fd[id]=e.value});let pre=_cP==='WB'?'wb_':'ozon_',ps=_g('erp_products')||{},sv=function(i){let e=document.getElementById(i);return e?e.value:'0'};ps[_cI]={platform:_cP,sku:sn,ts:Date.now(),fields:fd,summary:{price:sv(pre+'price'),platformCommission:sv(pre+'commissionFee'),totalLogisticsCost:sv(pre+'totalLogisticsCost'),wbTotalDeduction:sv(pre+'wbTotalDeduction'),wbDeductionRatio:sv(pre+'wbDeductionRatio'),profitRmb:sv('profitRmb'),netMargin:sv('netMargin'),roiRate:sv('roiRate')}};_s('erp_products',ps);showDashboard()}catch(e){alert('保存失败，错误信息: '+e.message)}}function renderTable(){let tb=document.getElementById('tableBody');if(!tb)return;try{let ps=_g('erp_products')||{};tb.innerHTML='';let ks=Object.keys(ps);if(ks.length===0){tb.innerHTML='<tr><td colspan="11" style="text-align:center; color:#9ca3af; padding: 3rem;">暂无产品数据，请点击上方品牌入口新建</td></tr>';return}let a=ks.map(k=>({id:k,...(ps[k]||{})}));a.sort((x,y)=>(y.ts||y.timestamp||0)-(x.ts||x.timestamp||0));let pfe=document.getElementById('platformFilter'),sfe=document.getElementById('skuFilter'),pf=pfe?pfe.value:'All',sf=sfe?sfe.value.toLowerCase():'';a=a.filter(p=>{let pl=p.platform||'WB',mp=(pf==='All'||pl===pf),ms=(p.sku||'').toLowerCase().includes(sf);return mp&&ms});if(a.length===0){tb.innerHTML='<tr><td colspan="11" style="text-align:center; color:#9ca3af; padding: 3rem;">未能检索到符合条件的数据</td></tr>';return}a.forEach(p=>{let s=p.summary||{},pl=p.platform||'WB',pt=pl==='WB'?'<span class="plat-tag tag-wb">WB</span>':'<span class="plat-tag tag-ozon">Ozon</span>',pf=parseFloat(s.profitRmb)||0,il=pf<0,c=il?'text-loss':'text-profit',tr=document.createElement('tr'),cd=s.platformCommission||s.wbCommissionFee||'0';tr.innerHTML=`<td>${pt}</td><td style="color:#6366f1; font-weight: 800;">${p.sku||'未知'}</td><td>₽ ${s.price||'0'}</td><td>₽ ${cd}</td><td>₽ ${s.totalLogisticsCost||'0'}</td><td>₽ ${s.wbTotalDeduction||'0'}</td><td>${s.wbDeductionRatio||'0'} %</td><td class="${c}">¥ ${s.profitRmb||'0'}</td><td class="${c}">${s.netMargin||'0'} %</td><td class="${c}">${s.roiRate||'0'} %</td><td><div style="display:flex; justify-content:center; gap:0.5rem;"><button class="btn btn-primary" style="padding:0.4rem 1rem; font-size:0.85rem;" onclick="editProduct('${p.id}')">编辑</button> <button class="btn btn-danger" style="padding:0.4rem 1rem; font-size:0.85rem;" onclick="deleteProduct('${p.id}')">删除</button></div></td>`;tb.appendChild(tr)})}catch(e){tb.innerHTML='<tr><td colspan="11" style="text-align:center; color:red;">渲染列表失败，请点击右上角清理缓存</td></tr>'}}function clearAllData(){if(confirm('⚠️ 警告：这会彻底清空您保存的所有产品、模板以及导出的字典数据！确定要清空吗？')){localStorage.removeItem('erp_products');localStorage.removeItem('erp_templates');localStorage.removeItem('ozon_matrix_cache');localStorage.removeItem('ozon_vol_bands');alert('清理完毕！页面即将刷新。');location.reload()}}function exportData(){let p=_g('erp_products'),t=_g('erp_templates');if(Object.keys(p).length===0&&Object.keys(t).length===0){alert('当前没有任何数据可导出！');return}let b=new Blob([JSON.stringify({products:p,templates:t})],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`双核定价系统备份_${new Date().toISOString().slice(0, 10)}.json`;a.click()}function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(x){try{let j=JSON.parse(x.target.result);if(j.products){_s('erp_products',j.products);if(j.templates)_s('erp_templates',j.templates)}else{_s('erp_products',j)}alert('数据导入成功！');loadTemplateDropdown();renderTable()}catch(err){alert('文件格式错误！导入失败。')}};r.readAsText(f)}window.onload=function(){_ud();loadTemplateDropdown();renderTable();let m=_g('ozon_matrix_cache');if(!m||Object.keys(m).length===0){let md=document.getElementById('pasteModal');if(md)md.style.display='block'}};
+</script>
+</body>
+</html>
