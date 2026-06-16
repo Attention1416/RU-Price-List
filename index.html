@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全链路产品定价核算 ERP - 柔和高定版</title>
+    <title>全链路产品定价核算 ERP - Pro SaaS Edition</title>
     
+    <!-- 引入全球顶级字体库 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入强大的网页截图引擎 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        /* ==================== 顶级灵动微质感 UI 架构 (Apple级柔和圆角) ==================== */
+        /* ==================== 顶级灵动微质感 UI 架构 ==================== */
         :root {
             --bg-body: #f1f5f9;
             --bg-card: rgba(255, 255, 255, 0.95);
@@ -41,7 +43,7 @@
             color: var(--text-main); 
             -webkit-font-smoothing: antialiased;
             position: relative; z-index: 0;
-            user-select: none;
+            user-select: none; /* 基础防御 */
         }
         
         input, select, textarea { user-select: auto; }
@@ -85,7 +87,7 @@
         .tag-wb { background-color: var(--color-wb); }
         .tag-ozon { background-color: var(--color-ozon); }
 
-        /* 实体精密面板 (大圆角 20px) */
+        /* 实体精密面板 */
         .card { background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 20px; box-shadow: var(--shadow-card); border: 1px solid var(--border-light); padding: 1.75rem 2rem; margin-bottom: 0; }
         .card-title { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.5rem; color: var(--text-main); }
         .card-title-indicator { width: 4px; height: 18px; border-radius: 2px; }
@@ -95,7 +97,7 @@
         .input-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; margin-bottom: 1rem; position: relative; z-index: 2;}
         .result-row { display: flex; flex-wrap: wrap; gap: 1rem; padding-top: 0.5rem; position: relative; z-index: 2;}
 
-        /* 输入控件 (内部结构圆角 12px) */
+        /* 输入控件 */
         .input-group { background: #ffffff; border-radius: 12px; padding: 0.6rem 0.85rem; display: flex; flex-direction: column; justify-content: center; transition: all 0.2s ease; flex: 1; min-width: 140px; border: 1px solid var(--border-base); box-shadow: 0 1px 2px rgba(0,0,0,0.02);}
         .input-group:hover { border-color: var(--border-active); }
         .input-group:focus-within { border-color: var(--focus-border); box-shadow: 0 0 0 3px var(--focus-ring); }
@@ -106,6 +108,7 @@
         input[type="number"], input[type="text"], .value-readonly { background: transparent; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-main); outline: none; width: 100%; min-width: 2rem; text-align: left; font-family: 'Inter', monospace; font-variant-numeric: tabular-nums; display: flex; align-items: center;}
         input::placeholder { color: var(--border-active); font-weight: 400; }
         
+        /* 尺寸复合输入框 */
         .combo-group { background: #ffffff; border-radius: 12px; padding: 0.6rem 0.85rem; display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 260px; transition: all 0.2s ease; border: 1px solid var(--border-base); box-shadow: 0 1px 2px rgba(0,0,0,0.02);}
         .combo-group:hover { border-color: var(--border-active); }
         .combo-group:focus-within { border-color: var(--focus-border); box-shadow: 0 0 0 3px var(--focus-ring); }
@@ -118,7 +121,7 @@
         .select-wrapper { position: relative; display: flex; align-items: center; width: 100%;}
         .select-wrapper::after { content: "▼"; font-size: 0.6rem; position: absolute; right: 0; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--text-muted); }
 
-        /* 💡 终极渲染层修复：替换 Input 为 Div，彻底杜绝 html2canvas 截断文字Bug */
+        /* 防裁切底层渲染架构 */
         .result-box { border-radius: 12px; padding: 0.85rem 1rem; display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 150px; border: 1px solid transparent; transition: all 0.2s ease; background: #fff;}
         .result-box label { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.2; letter-spacing: 0.02em;}
         .value-display { flex: 1; font-size: 1.5rem; font-weight: 800; text-align: right; font-family: 'Inter', monospace; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; justify-content: flex-end;}
@@ -126,7 +129,6 @@
         .text-left-input .input-wrapper { display: flex; justify-content: flex-start; align-items: center; gap: 0.2rem; }
         .text-left-input .value-display { justify-content: flex-start; text-align: left; }
 
-        /* 标题与色彩体系 */
         .bg-indigo { background-color: var(--color-indigo-500); } .bg-emerald { background-color: var(--color-emerald-500); } .bg-amber { background-color: var(--color-amber-500); } .bg-rose { background-color: var(--color-rose-500); } .bg-ozon { background-color: var(--color-ozon); }
         
         .res-tint-blue { background: #eff6ff; border-color: #bfdbfe; }
@@ -140,7 +142,7 @@
         .res-tint-gray { background: #f8fafc; border-color: #e2e8f0; }
         .res-tint-gray label { color: #475569; } .res-tint-gray .value-display { color: #0f172a; }
 
-        /* 强制高饱和实色块 */
+        /* 高饱和实色块 */
         .res-solid-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important; border: none !important; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3) !important; }
         .res-solid-green label, .res-solid-green .symbol, .res-solid-green .value-display { color: #ffffff !important; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         .res-solid-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important; border: none !important; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3) !important; }
@@ -153,41 +155,40 @@
         #wb-module-2::after { content: 'W B'; position: absolute; right: -5px; bottom: -20px; font-size: 150px; font-weight: 900; color: var(--color-wb); opacity: 0.03; z-index: 1; pointer-events: none; line-height: 1; font-family: 'Arial Black', Impact, sans-serif;}
         #ozon-module-2::after { content: 'O Z'; position: absolute; right: -5px; bottom: -20px; font-size: 150px; font-weight: 900; color: var(--color-ozon); opacity: 0.03; z-index: 1; pointer-events: none; line-height: 1; font-family: 'Arial Black', Impact, sans-serif;}
 
-        /* 布局栅格 */
         .detail-grid { display: grid; grid-template-columns: 32% 66%; gap: 1.5rem; margin-bottom: 1.5rem; align-items: start; }
         @media (max-width: 1200px) { .detail-grid { grid-template-columns: 1fr; } }
         .col-left, .col-right { display: flex; flex-direction: column; gap: 1.5rem; }
 
-        /* 详情动作控制条 (圆角 16px) */
+        /* 详情动作控制条 */
         .action-bar { background: var(--bg-card); backdrop-filter: blur(16px); border-radius: 16px; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; box-shadow: var(--shadow-card); border: 1px solid var(--border-light); flex-wrap: wrap; gap: 1rem;}
-        
         .sku-input { background: #ffffff; border: 1px solid var(--border-base); border-radius: 10px; padding: 0.6rem 1rem; font-size: 1rem; font-weight: 700; color: var(--color-indigo-500); width: 280px; outline: none; transition: all 0.2s ease; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);}
         .sku-input:focus { border-color: var(--focus-border); box-shadow: 0 0 0 3px var(--focus-ring); }
-
         .template-group { display: flex; align-items: center; gap: 0.5rem; background: #ffffff; border: 1px solid var(--border-base); border-radius: 10px; padding: 0.25rem 0.5rem; transition: all 0.2s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.02);}
         .template-group:focus-within { border-color: var(--focus-border); box-shadow: 0 0 0 3px var(--focus-ring); }
         .template-group select { border: none; background: transparent; font-size: 0.9rem; font-weight: 600; color: var(--text-main); width: 150px; padding-left: 0.5rem; outline: none; }
         .btn-icon { border: none; background: transparent; padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.15s; color: var(--text-label);}
         .btn-icon:hover { background: #f1f5f9; color: var(--text-main); } 
 
-        /* 灵动呼吸光效进度条 (完美规避截图裁切) */
+        /* 🔥 灵动呼吸光效进度条 (完美规避截图裁切，修复负数崩溃) */
         @keyframes gradient-x { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .progress-box { position: relative; overflow: hidden; background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; min-width: 160px; z-index: 1; }
         .progress-bar { position: absolute; top: 0; left: 0; height: 100%; z-index: -1; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
         .progress-box label { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-label); }
         
-        /* 超大字体 Div 展示层，替代 Input */
         .progress-box .value-display { font-size: 2.2rem; font-weight: 800; color: var(--text-main); text-align: right; width: 100%; justify-content: flex-end; letter-spacing: -1px;}
         #profitRubBox .value-display, #profitRmbBox .value-display, #wb_wbTotalDeduction, #ozon_wbTotalDeduction { font-size: 2.2rem; }
 
         .bar-green { background-image: linear-gradient(90deg, rgba(16,185,129,0.7), rgba(52,211,153,0.2), rgba(16,185,129,0.7)) !important; background-size: 200% 100% !important; animation: gradient-x 2.5s ease-in-out infinite !important; }
-        .bar-red { background-image: linear-gradient(90deg, rgba(239,68,68,0.8), rgba(248,113,113,0.3), rgba(239,68,68,0.8)) !important; background-size: 200% 100% !important; animation: gradient-x 2s ease-in-out infinite !important; border-right: 4px solid #b91c1c; }
+        
+        /* 💡 修复：去除了导致 html2canvas 引擎崩溃的 border-right 属性 */
+        .bar-red { background-image: linear-gradient(90deg, rgba(239,68,68,0.8), rgba(248,113,113,0.3), rgba(239,68,68,0.8)) !important; background-size: 200% 100% !important; animation: gradient-x 2s ease-in-out infinite !important; }
+        
         .text-red-alert .value-display,.text-red-alert label { color: #b91c1c !important; }
         
         /* 快门动画冻结指令 */
         .no-animation * { animation: none !important; transition: none !important; }
 
-        /* 表格区域 (圆角 20px) */
+        /* 表格区域 */
         .table-container { background: var(--bg-card); border-radius: 20px; padding: 1.5rem; box-shadow: var(--shadow-card); border: 1px solid var(--border-light); overflow-x: auto;}
         .filter-bar { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
         .filter-input { background: #ffffff; border: 1px solid var(--border-base); border-radius: 10px; padding: 0.6rem 1rem; font-size: 0.95rem; font-weight: 500; color: var(--text-main); outline: none; transition: all 0.2s ease; width: 320px; box-shadow: 0 1px 2px rgba(0,0,0,0.02);}
@@ -201,9 +202,8 @@
         tr:hover td { background-color: #f8fafc; }
         .text-profit { color: #10b981; font-family: 'Inter', monospace;} .text-loss { color: #dc2626; font-family: 'Inter', monospace;}
         
-        .status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; } 
-        .dot-green { background-color:#10b981; animation: pulse-green 2s infinite; } 
-        .dot-yellow { background-color:#f59e0b; }
+        input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+        .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;} .dot-green{background-color:#10b981; animation: pulse-green 2s infinite;} .dot-yellow{background-color:#f59e0b;}
         @keyframes pulse-green { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16,185,129,0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16,185,129,0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16,185,129,0); } }
         
         #csvPasteArea { width: 100%; height: 120px; border: 1px dashed var(--border-active); border-radius: 12px; padding: 1rem; font-size: 0.85rem; font-family: monospace; color: var(--text-main); background: #f8fafc; resize: vertical; margin-bottom: 1rem; outline: none; transition: all 0.2s ease;}
@@ -211,8 +211,6 @@
         
         .fade-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* 模态框圆角 */
         #pasteModal { border-radius: 16px; }
     </style>
 </head>
@@ -270,8 +268,9 @@
                 <button class="btn btn-primary" onclick="saveProduct()">保存方案</button>
             </div>
             <div style="display: flex; gap: 0.8rem; align-items: center;">
+                <!-- 📸 增强版截图按钮 -->
                 <button class="btn btn-outline" style="color: #4f46e5; border-color: #c7d2fe;" onclick="copyToClipboard(this)">
-                    📸 一键复制长截图
+                    📸 一键生成长图
                 </button>
                 <div class="template-group">
                     <div class="select-wrapper" style="width: 130px;"><select id="templateSelect"><option value="">-- 参数模板 --</option></select></div>
@@ -325,7 +324,6 @@
                 </div>
 
                 <div class="col-right">
-                    
                     <div id="wb-right-engine">
                         <div class="card" id="wb-module-2">
                             <h2 class="card-title"><div class="card-title-indicator bg-emerald"></div>WB 平台费用板块</h2>
@@ -381,7 +379,7 @@
                             <div class="result-row">
                                 <div class="result-box res-tint-amber res-small text-left-input"><label>广告其它费</label><div class="input-wrapper"><span class="symbol">₽</span><div id="wb_adFee" class="value-display">0</div></div></div>
                                 <div class="result-box res-tint-amber res-small text-left-input"><label>无法均摊 (1%)</label><div class="input-wrapper"><span class="symbol">₽</span><div id="wb_unallocatedFee" class="value-display">0</div></div></div>
-                                <div class="result-box res-tint-amber res-small text-left-input"><label>FBW仓租 (30天)</label><div class="input-wrapper"><span class="symbol">₽</span><div id="wb_fbwStorageFee" class="value-display">0</div></div></div>
+                                <div class="result-box res-tint-amber res-small text-left-input"><label>FBW仓租(30天)</label><div class="input-wrapper"><span class="symbol">₽</span><div id="wb_fbwStorageFee" class="value-display">0</div></div></div>
                             </div>
                             
                             <div class="result-row" style="margin-top:1.5rem;">
@@ -480,6 +478,7 @@
                 </div>
             </div>
 
+            <!-- 全局汇总看板 -->
             <div class="card" id="module-4" style="margin-top: 0.5rem;">
                 <h2 class="card-title"><div class="card-title-indicator bg-rose"></div>回款明细和最终利润</h2>
                 <div class="input-row" style="margin-top: 1.25rem;">
@@ -513,13 +512,13 @@
 </div>
 
 <script>
-// ==================== 📸 终极一键截图引擎 (完美解决截图裁切与白屏) ====================
+// ==================== 📸 防降级增强版一键截图引擎 ====================
 async function copyToClipboard(btn) {
     let originalHTML = btn.innerHTML;
     btn.innerHTML = '正在渲染完美长图...';
     btn.disabled = true;
     
-    // 💡 魔法1：瞬间冻结呼吸灯动画，确保颜色最饱满
+    // 💡 瞬间冻结呼吸灯动画，确保颜色最饱满，同时规避截切 Bug
     document.body.classList.add('no-animation'); 
     
     try {
@@ -533,29 +532,39 @@ async function copyToClipboard(btn) {
         
         canvas.toBlob(async function(blob) {
             try {
+                // 尝试写入系统剪贴板
                 const item = new ClipboardItem({ 'image/png': blob });
                 await navigator.clipboard.write([item]);
-                btn.innerHTML = '✅ 已复制，去粘贴吧！';
+                btn.innerHTML = '✅ 已复制，可直接粘贴！';
                 btn.style.backgroundColor = '#10b981';
                 btn.style.color = '#fff';
                 btn.style.borderColor = '#10b981';
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.style.backgroundColor = '';
-                    btn.style.color = '#4f46e5';
-                    btn.style.borderColor = '#c7d2fe';
-                    btn.disabled = false;
-                }, 3000);
             } catch (err) {
-                alert('复制失败，请检查浏览器剪贴板权限！');
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
+                // 💡 强大的自动降级：如果浏览器禁用了剪贴板写入，自动触发图片下载！
+                let a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `核算方案截图_${Date.now()}.png`;
+                a.click();
+                btn.innerHTML = '✅ 已自动下载长截图！';
+                btn.style.backgroundColor = '#10b981';
+                btn.style.color = '#fff';
+                btn.style.borderColor = '#10b981';
             }
-            // 💡 魔法2：恢复呼吸动画
+            
+            // 3秒后恢复按钮状态
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.backgroundColor = '';
+                btn.style.color = '#4f46e5';
+                btn.style.borderColor = '#c7d2fe';
+                btn.disabled = false;
+            }, 3000);
+            
+            // 解除冻结，恢复呼吸动画
             document.body.classList.remove('no-animation');
         }, 'image/png');
     } catch (err) {
-        alert('截图生成失败！');
+        alert('截图引擎生成失败！');
         btn.innerHTML = originalHTML;
         btn.disabled = false;
         document.body.classList.remove('no-animation');
@@ -568,18 +577,7 @@ document.addEventListener('keydown', e => { if (e.key === 'F12' || (e.ctrlKey &&
 
 const _wM={"95-100":{r:0.5,k:0},"90-94":{r:0.65,k:0},"85-89":{r:0.75,k:0},"80-84":{r:0.85,k:0},"75-79":{r:0.95,k:0},"70-74":{r:1,k:0},"65-69":{r:1,k:0},"60-64":{r:1,k:0},"55-59":{r:1.05,k:0.02},"50-54":{r:1.15,k:0.0205},"45-49":{r:1.25,k:0.0205},"40-44":{r:1.35,k:0.021},"35-39":{r:1.45,k:0.021},"30-34":{r:1.55,k:0.0215},"25-29":{r:1.65,k:0.022},"20-24":{r:1.75,k:0.0225},"15-19":{r:1.85,k:0.023},"10-14":{r:1.9,k:0.0235},"5-9":{r:1.95,k:0.0245},"0-4":{r:2,k:0.025},none:{r:1,k:0}};const _oR={"Алматы":0.06,"Армения":0,"Астана":0.06,"Беларусь":0.06,"Воронеж":0.08,"Дальний Восток":0,"Екатеринбург":0.08,"Казань":0.08,"Калининград":0.08,"Краснодар":0.08,"Красноярск":0,"Кыргызстан":0,"Махачкала":0.08,"Москва, МО и Дальние регионы":0.08,"Невинномысск":0.08,"Новосибирск":0,"Омск":0.12,"Оренбург":0.12,"Пермь":0.12,"Ростов":0,"Самара":0.12,"Санкт-Петербург и СЗО":0.08,"Саратов":0.08,"Тверь":0.08,"Тюмень":0.08,"Узбекистан":0,"Уфа":0.08,"Ярославль":0.08};const _tM={t1:{b:6,v:0,t:'s'},t2:{b:15,v:0,t:'p'},t3:{b:7,v:5,t:'s'},t4:{b:15,v:5,t:'p'},t5:{b:0,v:0,t:'s'}};const _tF=['exchangeRate','taxSystem','lossRate','wb_discount','wb_commissionRate','wb_shippingMethod','wb_locIndex','wb_baseRate','wb_over1LRate','wb_fbwMultiplier','wb_deliveryRate','wb_adRate','wb_storagePerL','ozon_discount','ozon_commissionRate','ozon_shippingMethod','ozon_fromCluster','ozon_toCluster','ozon_deliveryRate','ozon_lastMile','ozon_processing','ozon_returnProcessing','ozon_adRate','ozon_storagePerL'];let _cI=null,_cP='WB';
 function _g(k){try{let r=JSON.parse(localStorage.getItem(k));return(r&&typeof r==='object'&&!Array.isArray(r))?r:{}}catch(e){return{}}}function _ga(k){try{let r=JSON.parse(localStorage.getItem(k));return Array.isArray(r)?r:[]}catch(e){return[]}}function _s(k,v){localStorage.setItem(k,JSON.stringify(v))}function _v(i){let e=document.getElementById(i);return e?(e.tagName==='INPUT'||e.tagName==='SELECT'?parseFloat(e.value)||0:parseFloat(e.innerText)||0):0}
-
-// 💡 修复：底层格式化函数升级，自动识别 Input 和 Div 进行写入
-function _f(i,v,f=!1){
-    let e=document.getElementById(i);
-    if(e){
-        let txt = v!==0?(f?v.toFixed(2):Math.round(v).toLocaleString()):'0';
-        if(e.tagName==='INPUT'||e.tagName==='SELECT') e.value=txt;
-        else e.innerText=txt;
-    }
-    return v;
-}
-
+function _f(i,v,f=!1){let e=document.getElementById(i);if(e){let txt=v!==0?(f?v.toFixed(2):Math.round(v).toLocaleString()):'0';if(e.tagName==='INPUT'||e.tagName==='SELECT')e.value=txt;else e.innerText=txt}return v}
 function _gb(v){let b=_ga('ozon_vol_bands');if(b.length>0){for(let i=0;i<b.length;i++){if(v<=b[i].max)return b[i].key}return b[b.length-1].key}if(v<=0.2)return"0-0,200 л";if(v<=0.4)return"0,201-0,4 л";if(v<=0.6)return"0,401-0,6 л";if(v<=0.8)return"0,601-0,8 л";if(v<=1.0)return"0,801-1 л";if(v<=1.25)return"1,001-1,25 л";if(v<=1.5)return"1,251-1,5 л";if(v<=1.75)return"1,501-1,75 л";if(v<=2.0)return"1,751-2 л";if(v<=3.0)return"2,001-3 л";if(v<=4.0)return"3,001-4 л";if(v<=5.0)return"4,001-5 л";let u=Math.ceil(v);return`${u-1},001-${u} л`}
 function _gf(v,p,f,t){let vs=_gb(v),m=_g('ozon_matrix_cache'),ih=p>300;if(m&&m[f]&&m[f][t]&&m[f][t][vs])return ih?m[f][t][vs].o:m[f][t][vs].u;if(v<=0.2)return ih?56:17.28;if(v<=0.4)return ih?63:19.32;if(v<=0.6)return ih?67:21.35;if(v<=0.8)return ih?67:22.37;if(v<=1.0)return ih?67:23.38;if(v<=1.25)return ih?71:25.42;if(v<=1.5)return ih?74:26.43;if(v<=1.75)return ih?74:27.45;if(v<=2.0)return ih?74:29.48;if(v<=3.0)return ih?74:31.52;if(v<=4.0)return ih?78:35.58;let x=Math.ceil(v-4);return ih?(78+x*12):(35.58+x*10)}
 function updateOzonDbStatus(){let s=document.getElementById('ozonDbStatus'),m=_g('ozon_matrix_cache');if(!s)return;if(m&&Object.keys(m).length>0){s.innerHTML='<span class="status-dot dot-green"></span>已挂载本地全量数据表';s.style.color='#10b981'}else{s.innerHTML='<span class="status-dot dot-yellow"></span>未导入 (当前使用底线默认价)';s.style.color='#f59e0b'}}
@@ -595,10 +593,7 @@ window.togglePlatformView=function(p){_cP=p;let b=document.getElementById('curre
 window.createNewProduct=function(p){_cI=Date.now().toString();togglePlatformView(p||'WB');document.querySelectorAll('input[type="number"], input[type="text"]').forEach(e=>{if(e.id!=='skuFilter'&&e.id!=='csvPasteArea')e.value=''});document.getElementById('skuName').value='';document.getElementById('templateSelect').value='';calculateAll();document.getElementById('dashboardView').style.display='none';document.getElementById('detailView').style.display='block'}
 window.editProduct=function(id){_cI=id;let ps=_g('erp_products'),pd=ps[id];if(pd){togglePlatformView(pd.platform||'WB');document.getElementById('skuName').value=pd.sku||'';for(let k in pd.fields){let e=document.getElementById(k);if(e)e.value=pd.fields[k]}document.getElementById('templateSelect').value='';calculateAll();document.getElementById('dashboardView').style.display='none';document.getElementById('detailView').style.display='block'}}
 window.deleteProduct=function(id){if(confirm('确定删除该方案吗？')){let ps=_g('erp_products');delete ps[id];_s('erp_products',ps);renderTable()}}
-
-// 💡 修复：保存逻辑兼容 Div 值的读取
 window.saveProduct=function(){try{let se=document.getElementById('skuName');if(!se||!se.value.trim()){alert('提示：请先在上方填写 SKU 或产品名称！');return}let sn=se.value.trim(),fd={};_tF.forEach(id=>{let e=document.getElementById(id);fd[id]=e?e.value:''});['productCost','exchangeRate','length','width','height','wb_price','ozon_price'].forEach(id=>{let e=document.getElementById(id);if(e)fd[id]=e.value});let pre=_cP==='WB'?'wb_':'ozon_',ps=_g('erp_products')||{},sv=function(i){let e=document.getElementById(i);return e?(e.tagName==='INPUT'||e.tagName==='SELECT'?e.value:e.innerText):'0'};ps[_cI]={platform:_cP,sku:sn,ts:Date.now(),fields:fd,summary:{price:sv(pre+'price'),platformCommission:sv(pre+'commissionFee'),totalLogisticsCost:sv(pre+'totalLogisticsCost'),wbTotalDeduction:sv(pre+'wbTotalDeduction'),wbDeductionRatio:sv(pre+'wbDeductionRatio'),profitRmb:sv('profitRmb'),netMargin:sv('netMargin'),roiRate:sv('roiRate')}};_s('erp_products',ps);showDashboard()}catch(e){alert('保存失败: '+e.message)}}
-
 window.renderTable=function(){let tb=document.getElementById('tableBody');if(!tb)return;try{let ps=_g('erp_products')||{};tb.innerHTML='';let ks=Object.keys(ps);if(ks.length===0){tb.innerHTML='<tr><td colspan="11" style="text-align:center; color:#9ca3af; padding: 4rem;">暂无核算数据，请点击上方平台卡片新建</td></tr>';return}let a=ks.map(k=>({id:k,...(ps[k]||{})}));a.sort((x,y)=>(y.ts||y.timestamp||0)-(x.ts||x.timestamp||0));let pf=document.getElementById('platformFilter').value,sf=document.getElementById('skuFilter').value.toLowerCase();a=a.filter(p=>{let pl=p.platform||'WB';return(pf==='All'||pl===pf)&&(p.sku||'').toLowerCase().includes(sf)});if(a.length===0){tb.innerHTML='<tr><td colspan="11" style="text-align:center; color:#9ca3af; padding: 4rem;">未能检索到符合条件的数据</td></tr>';return}a.forEach(p=>{let s=p.summary||{},pl=p.platform||'WB',pt=pl==='WB'?'<span class="plat-tag tag-wb">WB</span>':'<span class="plat-tag tag-ozon">OZON</span>';let profit=parseFloat(s.profitRmb)||0,c=profit<0?'text-loss':'text-profit',cd=s.platformCommission||s.wbCommissionFee||'0';let tr=document.createElement('tr');tr.innerHTML=`<td>${pt}</td><td style="font-weight: 700;">${p.sku||'未知'}</td><td>₽ ${s.price||'0'}</td><td>₽ ${cd}</td><td>₽ ${s.totalLogisticsCost||'0'}</td><td>₽ ${s.wbTotalDeduction||'0'}</td><td>${s.wbDeductionRatio||'0'} %</td><td class="${c}">¥ ${s.profitRmb||'0'}</td><td class="${c}">${s.netMargin||'0'} %</td><td class="${c}">${s.roiRate||'0'} %</td><td><div style="display:flex; justify-content:center; gap:0.5rem;"><button class="btn btn-outline" style="padding:0.35rem 0.85rem;" onclick="editProduct('${p.id}')">编辑</button> <button class="btn btn-danger-outline" style="padding:0.35rem 0.85rem;" onclick="deleteProduct('${p.id}')">删除</button></div></td>`;tb.appendChild(tr)})}catch(e){tb.innerHTML='<tr><td colspan="11" style="text-align:center; color:red;">渲染列表失败，请点击清理缓存</td></tr>'}}
 window.clearAllData=function(){if(confirm('警告：这会彻底清空所有产品、模板以及导出的数据！确定吗？')){localStorage.removeItem('erp_products');localStorage.removeItem('erp_templates');localStorage.removeItem('ozon_matrix_cache');localStorage.removeItem('ozon_vol_bands');alert('清理完毕！页面即将刷新。');location.reload()}}
 window.exportData=function(){let p=_g('erp_products'),t=_g('erp_templates');if(Object.keys(p).length===0&&Object.keys(t).length===0){alert('没有数据可导出！');return}let b=new Blob([JSON.stringify({products:p,templates:t})],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`双核定价系统备份_${new Date().toISOString().slice(0, 10)}.json`;a.click()}
