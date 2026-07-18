@@ -710,6 +710,71 @@
         .btn-icon:hover { color: #252930; background: #eef0f2; }
         #captureArea { padding: 8px; margin: -8px; border-radius: 18px; }
 
+        /* 长图专用信息头：平时隐藏，仅在 html2canvas 的克隆文档中显示 */
+        .capture-meta { display: none; }
+        .capture-render .capture-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: .9rem;
+            padding: 1rem 1.2rem;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+        .capture-meta-copy {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: .25rem;
+        }
+        .capture-meta-label {
+            color: #7a838f;
+            font-size: .65rem;
+            font-weight: 650;
+            letter-spacing: .055em;
+            text-transform: uppercase;
+        }
+        .capture-meta-value {
+            color: #24282f;
+            font-size: 1.08rem;
+            font-weight: 760;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+        .capture-platform {
+            flex: 0 0 auto;
+            padding: .38rem .68rem;
+            color: #fff;
+            border-radius: 7px;
+            font-size: .7rem;
+            font-weight: 780;
+            letter-spacing: .035em;
+        }
+        .capture-platform-wb { background: var(--color-wb); }
+        .capture-platform-ozon { background: var(--color-ozon); }
+
+        /*
+         * html2canvas 对原生 input 的文字基线存在裁切问题。
+         * 截图克隆中会将控件替换为同样式的文本节点，避免大字号数值被截断。
+         */
+        .capture-render .capture-control-value {
+            display: block !important;
+            height: auto !important;
+            min-height: 1.25em !important;
+            line-height: 1.25 !important;
+            white-space: nowrap !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            vertical-align: baseline !important;
+            background: transparent !important;
+            border: 0 !important;
+            box-shadow: none !important;
+        }
+        .capture-render .combo-inputs .capture-control-value { min-width: 0 !important; }
+
         .detail-grid {
             grid-template-columns: minmax(330px, .72fr) minmax(0, 1.5fr);
             gap: .9rem;
@@ -1226,6 +1291,13 @@
         </div>
 
         <div id="captureArea">
+            <div class="capture-meta" aria-hidden="true">
+                <div class="capture-meta-copy">
+                    <span class="capture-meta-label">SKU / 产品名称</span>
+                    <strong class="capture-meta-value" id="captureSkuValue">未填写 SKU / 产品名称</strong>
+                </div>
+                <span class="capture-platform capture-platform-wb" id="capturePlatformValue">WB 平台</span>
+            </div>
             <div class="detail-grid">
                 
                 <div class="col-left">
@@ -1517,60 +1589,136 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// ==================== 📸 防降级增强版一键截图引擎 ====================
+// ==================== 📸 防裁切增强版一键截图引擎 ====================
+const captureStyleProperties = [
+    'color', 'font-family', 'font-size', 'font-style', 'font-weight',
+    'font-variant-numeric', 'font-feature-settings', 'letter-spacing',
+    'text-align', 'text-transform', 'direction', 'width', 'min-width',
+    'max-width', 'flex', 'flex-grow', 'flex-shrink', 'flex-basis',
+    'align-self', 'padding-left', 'padding-right', 'margin-left',
+    'margin-right', 'opacity'
+];
+
+function getCaptureControlValue(control) {
+    if (control.tagName === 'SELECT') {
+        let selected = control.options[control.selectedIndex];
+        return selected ? selected.textContent.trim() : control.value;
+    }
+    return control.value || control.getAttribute('placeholder') || '';
+}
+
+function prepareCaptureClone(clonedDocument) {
+    let clonedArea = clonedDocument.getElementById('captureArea');
+    if (!clonedArea) return;
+
+    clonedDocument.body.classList.add('capture-render', 'no-animation');
+
+    let sku = (document.getElementById('skuName')?.value || '').trim();
+    let platform = (document.getElementById('currentPlatBadge')?.textContent || currentPlatform || 'WB').trim();
+    let clonedSku = clonedDocument.getElementById('captureSkuValue');
+    let clonedPlatform = clonedDocument.getElementById('capturePlatformValue');
+
+    if (clonedSku) clonedSku.textContent = sku || '未填写 SKU / 产品名称';
+    if (clonedPlatform) {
+        let isOzon = platform.toLowerCase().includes('ozon');
+        clonedPlatform.textContent = `${isOzon ? 'Ozon' : 'WB'} 平台`;
+        clonedPlatform.className = `capture-platform ${isOzon ? 'capture-platform-ozon' : 'capture-platform-wb'}`;
+    }
+
+    clonedArea.querySelectorAll('input, select, textarea').forEach(clonedControl => {
+        let sourceControl = clonedControl.id ? document.getElementById(clonedControl.id) : null;
+        if (!sourceControl) return;
+
+        let valueNode = clonedDocument.createElement('span');
+        let hasValue = sourceControl.tagName === 'SELECT' || sourceControl.value !== '';
+        let controlStyle = window.getComputedStyle(sourceControl);
+        let placeholderStyle = hasValue ? null : window.getComputedStyle(sourceControl, '::placeholder');
+
+        valueNode.className = 'capture-control-value';
+        valueNode.textContent = getCaptureControlValue(sourceControl);
+        valueNode.title = valueNode.textContent;
+        valueNode.setAttribute('data-source-id', sourceControl.id);
+
+        captureStyleProperties.forEach(property => {
+            let value = controlStyle.getPropertyValue(property);
+            if (value) valueNode.style.setProperty(property, value);
+        });
+        if (placeholderStyle) {
+            valueNode.style.color = placeholderStyle.color;
+            valueNode.style.fontWeight = placeholderStyle.fontWeight;
+        }
+        valueNode.style.boxSizing = 'border-box';
+        clonedControl.replaceWith(valueNode);
+    });
+}
+
+function canvasToPngBlob(canvas) {
+    return new Promise((resolve, reject) => {
+        canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('PNG 生成失败')), 'image/png');
+    });
+}
+
+function downloadCapture(blob) {
+    let sku = (document.getElementById('skuName')?.value || '未命名SKU').trim();
+    let safeSku = sku.replace(/[\\/:*?"<>|]+/g, '_').replace(/\s+/g, '_').slice(0, 60) || '未命名SKU';
+    let objectUrl = URL.createObjectURL(blob);
+    let link = document.createElement('a');
+    link.href = objectUrl;
+    link.download = `核算方案_${safeSku}_${Date.now()}.png`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+}
+
 async function copyToClipboard(btn) {
     let originalHTML = btn.innerHTML;
+    let resetButton = () => {
+        btn.innerHTML = originalHTML;
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+        btn.disabled = false;
+    };
+
     btn.innerHTML = '正在渲染完美长图...';
     btn.disabled = true;
-    
-    // 冻结动画防止错位
-    document.body.classList.add('no-animation'); 
-    
+    document.body.classList.add('no-animation');
+
     try {
         let targetArea = document.getElementById('captureArea');
+        if (!targetArea) throw new Error('找不到长图区域');
+        if (document.fonts?.ready) await document.fonts.ready;
+
         let canvas = await html2canvas(targetArea, {
-            scale: 2, 
+            scale: 2,
             backgroundColor: '#f4f6fb',
             useCORS: true,
-            logging: false
+            logging: false,
+            onclone: prepareCaptureClone
         });
-        
-        canvas.toBlob(async function(blob) {
-            try {
-                const item = new ClipboardItem({ 'image/png': blob });
-                await navigator.clipboard.write([item]);
-                btn.innerHTML = '已复制，可直接粘贴';
-                btn.style.backgroundColor = '#10b981';
-                btn.style.color = '#fff';
-                btn.style.borderColor = '#10b981';
-                showToast('长图已复制，可直接粘贴使用');
-            } catch (err) {
-                // 浏览器权限禁止时自动降级为下载
-                let a = document.createElement('a');
-                a.href = URL.createObjectURL(blob);
-                a.download = `核算方案截图_${Date.now()}.png`;
-                a.click();
-                btn.innerHTML = '长图已自动下载';
-                btn.style.backgroundColor = '#10b981';
-                btn.style.color = '#fff';
-                btn.style.borderColor = '#10b981';
-                showToast('长图已生成并自动下载');
+        let blob = await canvasToPngBlob(canvas);
+        let copied = false;
+
+        try {
+            if (!navigator.clipboard?.write || typeof ClipboardItem === 'undefined') {
+                throw new Error('当前浏览器不支持图片剪贴板');
             }
-            
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.style.backgroundColor = '';
-                btn.style.color = '';
-                btn.style.borderColor = '';
-                btn.disabled = false;
-            }, 3000);
-            
-            document.body.classList.remove('no-animation');
-        }, 'image/png');
+            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+            copied = true;
+        } catch (clipboardError) {
+            downloadCapture(blob);
+        }
+
+        btn.innerHTML = copied ? '已复制，可直接粘贴' : '长图已自动下载';
+        btn.style.backgroundColor = '#10b981';
+        btn.style.color = '#fff';
+        btn.style.borderColor = '#10b981';
+        showToast(copied ? '长图已复制，已包含 SKU' : '长图已生成并下载，已包含 SKU');
+        setTimeout(resetButton, 3000);
     } catch (err) {
+        console.error('长图生成失败：', err);
         showToast('截图生成失败，请稍后重试', 'error');
-        btn.innerHTML = originalHTML;
-        btn.disabled = false;
+        resetButton();
+    } finally {
         document.body.classList.remove('no-animation');
     }
 }
