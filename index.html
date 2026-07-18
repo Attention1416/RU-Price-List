@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全链路产品定价核算 ERP - Pro SaaS Edition</title>
+    <meta name="theme-color" content="#101827">
+    <title>跨境电商利润核算中心</title>
     
     <!-- 引入全球顶级字体库 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,7 +225,894 @@
         /* 页面切换动画 */
         .fade-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
+
+        /* ==================== Refined Finance Workspace UI ==================== */
+        :root {
+            --bg-body: #f5f6f7;
+            --bg-card: #ffffff;
+            --card-bg: #ffffff;
+            --surface-soft: #f8f9fa;
+            --surface-muted: #f0f2f4;
+            --header-bg: #ffffff;
+            --header-text: #17191d;
+            --border-light: #e7e9ed;
+            --border-base: #dfe3e8;
+            --border-active: #aeb5c0;
+            --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.025);
+            --shadow-float: 0 12px 32px rgba(17, 24, 39, 0.075);
+            --text-main: #181a1f;
+            --text-label: #66707f;
+            --text-muted: #929aa6;
+            --focus-ring: rgba(52, 57, 68, 0.11);
+            --focus-border: #343944;
+            --color-indigo-500: #5659c9;
+            --color-emerald-500: #138467;
+            --color-amber-500: #b97a16;
+            --color-rose-500: #c64966;
+            --color-red-600: #b93d52;
+            --color-teal-600: #157d78;
+            --color-wb: #bd1aa3;
+            --color-ozon: #0759e6;
+            --radius-sm: 9px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            color: var(--text-main);
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums;
+            background: var(--bg-body);
+        }
+        body::before,
+        body::after { display: none; }
+
+        .top-nav {
+            min-height: 68px;
+            padding: .72rem 0;
+            color: var(--text-main);
+            background: rgba(255, 255, 255, .97);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: none;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .nav-content {
+            width: min(95%, 1580px);
+            padding: 0 1rem;
+            gap: 1.5rem;
+        }
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: .72rem;
+            min-width: 0;
+        }
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: .92rem;
+            background: #1b1d22;
+            border: 1px solid #1b1d22;
+            border-radius: 10px;
+            box-shadow: none;
+        }
+        .brand-copy { min-width: 0; }
+        .brand-kicker {
+            margin-bottom: .18rem;
+            color: #858d99;
+            font-size: .64rem;
+            line-height: 1;
+            font-weight: 650;
+            letter-spacing: .06em;
+        }
+        .header-title h1 {
+            color: #181a1f;
+            font-size: 1rem;
+            line-height: 1.2;
+            font-weight: 720;
+            letter-spacing: -.015em;
+            white-space: nowrap;
+        }
+        .nav-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: .45rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            min-height: 38px;
+            padding: .57rem .88rem;
+            border-radius: 9px;
+            font-size: .8rem;
+            font-weight: 650;
+            letter-spacing: 0;
+            box-shadow: none;
+            transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease, box-shadow .16s ease;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); }
+        .btn:focus-visible {
+            box-shadow: 0 0 0 3px var(--focus-ring);
+            outline: none;
+        }
+        .btn-primary {
+            color: #fff;
+            background: #2d3037;
+            border-color: #2d3037;
+            box-shadow: none;
+        }
+        .btn-primary:hover { background: #1e2025; border-color: #1e2025; }
+        .btn-outline {
+            color: #505966;
+            background: #fff;
+            border-color: #dfe3e8;
+        }
+        .btn-outline:hover { color: #1e2229; background: #f8f9fa; border-color: #c9ced6; }
+        .btn-success {
+            color: #fff;
+            background: #176d58;
+            border-color: #176d58;
+            box-shadow: none;
+        }
+        .btn-success:hover { background: #105a48; border-color: #105a48; }
+        .btn-danger {
+            color: #a53a4d;
+            background: #fff;
+            border-color: #eadde0;
+        }
+        .btn-danger:hover { color: #fff; background: #ad3c50; border-color: #ad3c50; }
+        .btn-warning {
+            color: #69521f;
+            background: #fff;
+            border-color: #e6dfcf;
+        }
+        .btn-warning:hover { background: #faf8f2; border-color: #d4c8ad; }
+        .btn-nav {
+            min-height: 35px;
+            padding: .48rem .7rem;
+            color: #596270;
+            background: #f7f8f9;
+            border-color: #e8eaed;
+            backdrop-filter: none;
+        }
+        .btn-nav:hover { color: #1f232a; background: #f0f2f4; border-color: #dfe2e6; }
+        .btn-nav-danger {
+            min-height: 35px;
+            padding: .48rem .7rem;
+            color: #a34454;
+            background: #fff;
+            border-color: #eadde0;
+        }
+        .btn-nav-danger:hover { color: #9c3044; background: #fcf6f7; border-color: #dfcdd1; }
+        .btn i { font-size: .9em; }
+        .shortcut-hint {
+            margin-left: .08rem;
+            padding: .05rem .28rem;
+            color: rgba(255,255,255,.72);
+            background: rgba(255,255,255,.12);
+            border-radius: 4px;
+            font-size: .58rem;
+            font-weight: 700;
+        }
+
+        .container {
+            width: min(95%, 1580px);
+            padding: 2rem 1rem 4rem;
+        }
+        .dashboard-intro {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin: .25rem 0 1.2rem;
+        }
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            margin-bottom: .38rem;
+            color: #8a929e;
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .section-eyebrow::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #2b2f36;
+        }
+        .dashboard-intro h2 {
+            color: #17191d;
+            font-size: clamp(1.45rem, 2vw, 1.85rem);
+            line-height: 1.25;
+            font-weight: 720;
+            letter-spacing: -.035em;
+        }
+        .dashboard-intro p {
+            margin-top: .35rem;
+            color: #737c89;
+            font-size: .84rem;
+        }
+        .data-status {
+            display: inline-flex;
+            align-items: center;
+            gap: .46rem;
+            padding: .5rem 0;
+            color: #747d89;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            font-size: .72rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .data-status i { color: #337f68; }
+
+        .platform-selector {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: .8rem;
+            margin-bottom: 1.15rem;
+        }
+        .platform-card {
+            min-width: 0;
+            max-width: none;
+            min-height: 174px;
+            padding: 1.35rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--text-main);
+            text-align: left;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            isolation: isolate;
+        }
+        .platform-card::before,
+        .platform-card::after { display: none; }
+        .card-wb,
+        .card-ozon { background: #fff; }
+        .platform-card:hover {
+            transform: translateY(-2px);
+            border-color: #cfd4db;
+            box-shadow: var(--shadow-float);
+        }
+        .platform-card:focus-visible {
+            outline: none;
+            border-color: #aeb5bf;
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+        .platform-card-top,
+        .platform-logo-row,
+        .platform-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        .platform-kicker {
+            color: #8a929d;
+            font-size: .63rem;
+            font-weight: 720;
+            letter-spacing: .12em;
+        }
+        .platform-arrow {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            color: #7b838e;
+            background: #f7f8f9;
+            border: 1px solid #e7e9ec;
+            border-radius: 9px;
+            transition: all .18s ease;
+        }
+        .card-wb:hover .platform-arrow { color: #fff; background: var(--color-wb); border-color: var(--color-wb); }
+        .card-ozon:hover .platform-arrow { color: #fff; background: var(--color-ozon); border-color: var(--color-ozon); }
+        .logo-wb,
+        .logo-ozon {
+            margin: .42rem 0 0;
+            line-height: 1;
+            text-shadow: none;
+            position: relative;
+        }
+        .logo-wb { color: var(--color-wb); font-size: 2.2rem; }
+        .logo-ozon { color: var(--color-ozon); font-size: 2.08rem; }
+        .platform-card .sub-text {
+            margin: .32rem 0 .72rem;
+            color: #303640;
+            font-size: .85rem;
+            font-weight: 650;
+        }
+        .platform-meta {
+            justify-content: flex-start;
+            gap: 1rem;
+            padding-top: .7rem;
+            color: #868e99;
+            border-top: 1px solid #eff0f2;
+            font-size: .67rem;
+            font-weight: 580;
+        }
+        .platform-meta span { display: inline-flex; align-items: center; gap: .32rem; }
+        .platform-meta i { color: #9da4ad; }
+
+        .table-container {
+            padding: 0;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+        .table-toolbar {
+            padding: 1.15rem 1.25rem .72rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .table-toolbar h3 {
+            color: #202329;
+            font-size: 1.02rem;
+            font-weight: 690;
+            letter-spacing: -.018em;
+        }
+        .count-pill {
+            padding: .3rem .58rem;
+            color: #69727e;
+            background: #f5f6f7;
+            border: 1px solid #e8eaed;
+            border-radius: 7px;
+            font-size: .67rem;
+            font-weight: 650;
+            white-space: nowrap;
+        }
+        .filter-bar {
+            margin: 0;
+            padding: .25rem 1.25rem 1rem;
+            gap: .55rem;
+        }
+        .filter-control {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: .52rem;
+            padding: 0 .75rem;
+            background: #fafafa;
+            border: 1px solid #e3e6ea;
+            border-radius: 9px;
+            transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+        }
+        .filter-control:focus-within {
+            background: #fff;
+            border-color: var(--focus-border);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+        .filter-control i { color: #969da7; font-size: .76rem; }
+        .filter-select,
+        .filter-input {
+            height: 38px;
+            padding: 0;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            font-size: .8rem;
+        }
+        .filter-select:focus,
+        .filter-input:focus { border: 0; box-shadow: none; }
+        .filter-select { width: 180px; }
+        .filter-input { width: min(340px, 34vw); }
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            border-top: 1px solid #eceef1;
+        }
+        table { min-width: 1160px; }
+        th {
+            padding: .75rem .72rem;
+            color: #737b87;
+            background: #fafafa;
+            border-bottom-color: #eceef1;
+            font-size: .64rem;
+            font-weight: 700;
+            letter-spacing: .035em;
+        }
+        td {
+            padding: .9rem .72rem;
+            color: #303640;
+            border-bottom-color: #eff1f3;
+            font-size: .78rem;
+            font-weight: 560;
+            transition: background .14s ease;
+        }
+        tbody tr:last-child td { border-bottom: 0; }
+        tbody tr:hover td { background: #fafbfb; }
+        .sku-cell { color: #252930; font-weight: 680; }
+        .plat-tag {
+            padding: .25rem .5rem;
+            border-radius: 6px;
+            font-size: .64rem;
+            font-weight: 700;
+            box-shadow: none;
+        }
+        .tag-wb { background: #f6eaf4; color: #9f178b; }
+        .tag-ozon { background: #eaf1ff; color: #0752c9; }
+        .text-profit { color: #16735b; }
+        .text-loss { color: #a93b50; }
+
+        .action-bar {
+            position: sticky;
+            top: 78px;
+            z-index: 60;
+            padding: .72rem;
+            margin-bottom: .95rem;
+            background: rgba(255,255,255,.96);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(20, 25, 34, .055);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .action-cluster {
+            display: flex;
+            align-items: center;
+            gap: .48rem;
+            min-width: 0;
+        }
+        .action-main { flex: 1; }
+        .action-tools { justify-content: flex-end; }
+        .sku-input {
+            width: min(330px, 30vw);
+            min-height: 38px;
+            padding: .54rem .75rem;
+            color: #303640;
+            background: #fafafa;
+            border: 1px solid #e1e4e8;
+            border-radius: 9px;
+            box-shadow: none;
+        }
+        .sku-input:focus {
+            background: #fff;
+            border-color: var(--focus-border);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+        .template-group {
+            min-height: 38px;
+            padding: .15rem .3rem;
+            background: #fafafa;
+            border: 1px solid #e1e4e8;
+            border-radius: 9px;
+            box-shadow: none;
+        }
+        .template-group select { width: 140px; font-size: .76rem; }
+        .btn-icon {
+            min-height: 30px;
+            padding: .32rem .45rem;
+            color: #606977;
+            border-radius: 7px;
+            font-size: .72rem;
+        }
+        .btn-icon:hover { color: #252930; background: #eef0f2; }
+        #captureArea { padding: 8px; margin: -8px; border-radius: 18px; }
+
+        .detail-grid {
+            grid-template-columns: minmax(330px, .72fr) minmax(0, 1.5fr);
+            gap: .9rem;
+            margin-bottom: .9rem;
+        }
+        .col-left,
+        .col-right { gap: .9rem; }
+        .card {
+            padding: 1.25rem;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+        .card-title {
+            margin-bottom: 1rem;
+            padding-bottom: .78rem;
+            color: #25292f;
+            border-bottom: 1px solid #eff0f2;
+            font-size: .92rem;
+            font-weight: 690;
+            letter-spacing: -.012em;
+        }
+        .card-title-indicator {
+            width: 3px;
+            min-width: 3px;
+            height: .9rem;
+            border-radius: 99px;
+            opacity: .8;
+        }
+        .sub-module-title {
+            margin-top: 1.32rem;
+            margin-bottom: .72rem;
+            padding-top: .88rem;
+            color: #737b87;
+            border-top: 1px solid #eff0f2;
+            font-size: .68rem;
+            font-weight: 720;
+            letter-spacing: .075em;
+            text-transform: uppercase;
+        }
+        .input-row,
+        .result-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+            gap: .58rem;
+            margin-bottom: .58rem;
+        }
+        .product-basics-row {
+            grid-template-columns: minmax(0, .69fr) minmax(0, .72fr) minmax(0, 1.59fr);
+            column-gap: .48rem;
+        }
+        .product-basics-row .dimension-field {
+            padding-right: .58rem;
+            padding-left: .58rem;
+        }
+        .product-basics-row .combo-inputs {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+            gap: .22rem;
+        }
+        .product-basics-row .combo-inputs input {
+            width: 100%;
+            min-width: 0;
+        }
+        .logistics-totals-row .input-wrapper { justify-content: flex-start; }
+        .logistics-totals-row .result-box input {
+            width: 12ch;
+            max-width: calc(100% - 1.4rem);
+            flex: 0 1 12ch;
+            text-align: left !important;
+        }
+        .logistics-totals-row .logistics-ratio-value input {
+            width: 6ch;
+            flex-basis: 6ch;
+        }
+        .result-row { padding-top: .1rem; }
+        .logistics-summary-row {
+            margin-top: .45rem;
+            padding: .5rem;
+            background: #f7f8f9;
+            border: 1px solid #eceef1;
+            border-radius: 11px;
+        }
+        .input-group,
+        .combo-group {
+            min-width: 0;
+            min-height: 64px;
+            padding: .58rem .7rem;
+            background: #fff;
+            border: 1px solid #dfe3e8;
+            border-radius: 10px;
+            box-shadow: none;
+        }
+        .input-group:hover,
+        .combo-group:hover { border-color: #c4cad2; }
+        .input-group:focus-within,
+        .combo-group:focus-within {
+            background: #fff;
+            border-color: var(--focus-border);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+        .input-group label,
+        .combo-group label {
+            margin-bottom: .3rem;
+            color: #737c89;
+            font-size: .65rem;
+            font-weight: 650;
+            letter-spacing: .01em;
+        }
+        .input-wrapper { gap: .34rem; }
+        input[type="number"],
+        input[type="text"] {
+            color: #20242b;
+            font-size: .95rem;
+            font-weight: 680;
+        }
+        input::placeholder { color: #b0b6bf; font-weight: 450; }
+        input[readonly] { cursor: text; }
+        .combo-inputs input { font-size: .94rem; }
+        .multiply-sign { color: #a1a8b2; font-size: .74rem; }
+        select { color: #252a31; font-size: .8rem; font-weight: 620; }
+        .select-wrapper::after {
+            content: "\f078";
+            right: .03rem;
+            color: #9ba2ac;
+            font: 900 .58rem/1 "Font Awesome 6 Free";
+        }
+        .symbol { color: #9aa2ad; font-size: .78rem; }
+
+        .result-box {
+            min-width: 0;
+            min-height: 64px;
+            padding: .65rem .76rem;
+            background: #f7f8f9;
+            border: 1px solid #eceef1;
+            border-radius: 10px;
+            box-shadow: none;
+        }
+        .result-box label {
+            margin-bottom: .24rem;
+            color: #757e8a;
+            font-size: .65rem;
+            font-weight: 640;
+            letter-spacing: 0;
+        }
+        .result-box input {
+            color: #252930;
+            font-size: 1.14rem;
+            font-weight: 740;
+            letter-spacing: -.02em;
+        }
+        .res-small { padding: .62rem .74rem; }
+        .res-small input { font-size: 1.02rem; }
+        .res-plain { background: #fff; border-color: #e5e8ec; }
+        .res-tint-blue,
+        .res-tint-red,
+        .res-tint-amber,
+        .res-tint-teal,
+        .res-tint-gray {
+            background: #f7f8f9;
+            border-color: #eceef1;
+        }
+        .res-tint-blue label,
+        .res-tint-red label,
+        .res-tint-amber label,
+        .res-tint-teal label,
+        .res-tint-gray label { color: #747d89; }
+        .res-tint-blue input,
+        .res-tint-red input,
+        .res-tint-amber input,
+        .res-tint-teal input,
+        .res-tint-gray input { color: #24282f; }
+        .res-tint-blue .symbol,
+        .res-tint-red .symbol,
+        .res-tint-amber .symbol,
+        .res-tint-teal .symbol { color: #9aa2ad; }
+        .res-light-indigo {
+            background: #f2f2f7;
+            border: 1px solid #e5e5eb;
+        }
+        .res-light-indigo label { color: #717280; }
+        .res-light-indigo input,
+        .res-light-indigo .symbol { color: #42434c; }
+        .res-dark-teal,
+        .res-dark-rose,
+        .res-dark-ozon {
+            color: #fff;
+            background: #2a2e35;
+            border: 1px solid #2a2e35;
+        }
+        .res-dark-ozon { background: #234c9d; border-color: #234c9d; }
+        .res-dark-teal label,
+        .res-dark-teal input,
+        .res-dark-teal .symbol,
+        .res-dark-rose label,
+        .res-dark-rose input,
+        .res-dark-rose .symbol,
+        .res-dark-ozon label,
+        .res-dark-ozon input,
+        .res-dark-ozon .symbol { color: #fff !important; }
+        .platform-total {
+            grid-column: span 2;
+            color: #fff;
+            background: #202329;
+            border-color: #202329;
+        }
+        .platform-total label { color: #b8bec7 !important; }
+        .platform-total input,
+        .platform-total .symbol { color: #fff !important; }
+        .platform-ratio {
+            color: #252930;
+            background: #eef0f2;
+            border-color: #e1e4e8;
+        }
+        .platform-ratio label { color: #69727f !important; }
+        .platform-ratio input,
+        .platform-ratio .symbol { color: #252930 !important; }
+        .platform-summary-row {
+            grid-template-columns: minmax(0, 2fr) minmax(180px, .85fr);
+        }
+        .platform-summary-row .platform-total { grid-column: auto; }
+
+        .res-solid-green {
+            background: #176d58 !important;
+            border: 1px solid #176d58 !important;
+            box-shadow: none !important;
+        }
+        .res-solid-red {
+            background: #a93c50 !important;
+            border: 1px solid #a93c50 !important;
+            box-shadow: none !important;
+        }
+        #wb-module-2,
+        #ozon-module-2 {
+            border-top: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+        #wb-module-2::after,
+        #ozon-module-2::after { display: none; }
+        #module-4 {
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .progress-box {
+            min-height: 108px;
+            padding: 1rem 1.1rem;
+            background: #f7f8f9;
+            border: 1px solid #e9ebee;
+            border-radius: 11px;
+        }
+        .progress-box label { color: #737c88; font-size: .69rem; }
+        .progress-box input { color: #23272e; font-size: 1.68rem; font-weight: 730; }
+        .progress-bar {
+            opacity: .11;
+            transition: width .55s cubic-bezier(.2,.8,.2,1);
+        }
+        .bar-green,
+        .bar-red {
+            animation: none !important;
+            background-size: 100% 100% !important;
+            border-right: 0;
+        }
+        .bar-green { background: #188164 !important; }
+        .bar-red { background: #b84356 !important; }
+
+        #pasteModal {
+            background: #fff !important;
+            border: 1px solid #dfe3e8 !important;
+            border-radius: 12px !important;
+            box-shadow: 0 16px 38px rgba(17,24,39,.08) !important;
+        }
+        #csvPasteArea {
+            background: #fafafa;
+            border: 1px solid #dfe3e8;
+            border-radius: 9px;
+        }
+        #csvPasteArea:focus {
+            background: #fff;
+            border-color: var(--focus-border);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        .toast-stack {
+            position: fixed;
+            top: 82px;
+            right: 20px;
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            gap: .55rem;
+            pointer-events: none;
+        }
+        .toast {
+            min-width: 250px;
+            max-width: 350px;
+            display: flex;
+            align-items: center;
+            gap: .62rem;
+            padding: .75rem .84rem;
+            color: #f5f7f6;
+            background: rgba(28, 38, 35, .96);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 10px;
+            box-shadow: 0 14px 34px rgba(17,24,39,.16);
+            backdrop-filter: blur(12px);
+            font-size: .77rem;
+            font-weight: 600;
+            animation: toastIn .24s ease-out both;
+        }
+        .toast.error { color: #fff4f5; background: rgba(70, 30, 39, .97); }
+        .toast i { color: #72c5aa; }
+        .toast.error i { color: #e9a1ae; }
+        .toast.out { animation: toastOut .2s ease-in both; }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes toastOut {
+            to { opacity: 0; transform: translateX(14px); }
+        }
+
+        ::-webkit-scrollbar { width: 9px; height: 9px; }
+        ::-webkit-scrollbar-track { background: #f0f1f2; }
+        ::-webkit-scrollbar-thumb {
+            background: #c9ced5;
+            border: 2px solid #f0f1f2;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #aeb5bf; }
+
+        @media (max-width: 1200px) {
+            .detail-grid { grid-template-columns: 1fr; }
+            .action-bar { top: 76px; }
+        }
+        @media (max-width: 900px) {
+            .top-nav { position: relative; }
+            .nav-content {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: .75rem;
+            }
+            .nav-actions { width: 100%; justify-content: flex-start; }
+            .platform-selector { grid-template-columns: 1fr; }
+            .action-bar { position: relative; top: auto; align-items: stretch; }
+            .action-cluster { width: 100%; flex-wrap: wrap; }
+            .action-tools { justify-content: flex-start; }
+            .sku-input { flex: 1; width: auto; min-width: 210px; }
+        }
+        @media (max-width: 640px) {
+            .container { width: 100%; padding: 1.15rem .75rem 3rem; }
+            .brand-kicker { display: none; }
+            .header-title h1 { font-size: .92rem; }
+            .brand-mark { width: 36px; height: 36px; }
+            .nav-actions {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .nav-actions .btn { padding: .46rem .35rem; font-size: .68rem; }
+            .dashboard-intro {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: .7rem;
+            }
+            .dashboard-intro h2 { font-size: 1.35rem; }
+            .data-status { white-space: normal; }
+            .platform-card { min-height: 164px; padding: 1.15rem; }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .filter-control,
+            .filter-select,
+            .filter-input { width: 100%; }
+            .table-toolbar { align-items: flex-start; }
+            .card { padding: 1rem; border-radius: 13px; }
+            .input-row,
+            .result-row { grid-template-columns: 1fr; gap: .5rem; }
+            .input-group,
+            .combo-group,
+            .result-box,
+            .platform-total { min-width: 0; grid-column: auto; }
+            .platform-summary-row { grid-template-columns: 1fr; }
+            .action-main .btn-outline { width: 38px; padding: .5rem; }
+            .action-main .btn-outline .btn-label { display: none; }
+            .sku-input { order: 3; flex-basis: 100%; width: 100%; }
+            .action-tools > .btn { width: 100%; }
+            .template-group { width: 100%; }
+            .template-group .select-wrapper { flex: 1; }
+            .template-group select { width: 100%; }
+            .shortcut-hint { display: none; }
+            #captureArea { padding: 4px; margin: -4px; }
+            .toast-stack { top: 10px; right: 10px; left: 10px; }
+            .toast { min-width: 0; max-width: none; width: 100%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
         /* 截图快门屏蔽动画 */
         .no-animation * { animation: none !important; transition: none !important; }
     </style>
@@ -234,12 +1122,18 @@
 <!-- 沉浸式深色穹顶 -->
 <div class="top-nav">
     <div class="nav-content">
-        <div class="header-title"><h1>全链路产品定价核算 ERP</h1></div>
+        <div class="brand-lockup">
+            <div class="brand-mark"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="brand-copy header-title">
+                <div class="brand-kicker">跨境电商定价工作台</div>
+                <h1>利润核算中心</h1>
+            </div>
+        </div>
         <div class="nav-actions">
-            <button class="btn btn-nav" onclick="exportData()">导出数据备份</button>
+            <button class="btn btn-nav" onclick="exportData()"><i class="fa-solid fa-arrow-up-from-bracket"></i>导出备份</button>
             <input type="file" id="importFile" style="display: none;" accept=".json" onchange="importData(event)">
-            <button class="btn btn-nav" onclick="document.getElementById('importFile').click()">导入数据恢复</button>
-            <button class="btn btn-nav-danger" onclick="clearAllData()">清空本地缓存</button>
+            <button class="btn btn-nav" onclick="document.getElementById('importFile').click()"><i class="fa-solid fa-arrow-right-to-bracket"></i>导入恢复</button>
+            <button class="btn btn-nav-danger" onclick="clearAllData()"><i class="fa-regular fa-trash-can"></i>清空缓存</button>
         </div>
     </div>
 </div>
@@ -248,30 +1142,63 @@
 
     <!-- ================= 大厅视图 ================= -->
     <div id="dashboardView" class="fade-in">
-        <div class="platform-selector">
-            <div class="platform-card card-wb" onclick="createNewProduct('WB')">
-                <div class="logo-wb">WB</div>
-                <div class="sub-text">创建 Wildberries 产品核算</div>
+        <div class="dashboard-intro">
+            <div>
+                <div class="section-eyebrow">定价工作台</div>
+                <h2>选择平台，开始精准核算</h2>
+                <p>统一核算成本、平台费用、物流、税费与最终利润。</p>
             </div>
-            <div class="platform-card card-ozon" onclick="createNewProduct('Ozon')">
-                <div class="logo-ozon">OZON</div>
+            <div class="data-status"><i class="fa-solid fa-shield-halved"></i>数据自动保存在当前浏览器</div>
+        </div>
+        <div class="platform-selector">
+            <div class="platform-card card-wb" role="button" tabindex="0" aria-label="创建 Wildberries 产品核算" onclick="createNewProduct('WB')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();createNewProduct('WB')}">
+                <div class="platform-card-top">
+                    <span class="platform-kicker">WILDBERRIES</span>
+                    <span class="platform-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+                <div class="platform-logo-row"><div class="logo-wb">WB</div></div>
+                <div class="sub-text">创建 Wildberries 产品核算</div>
+                <div class="platform-meta"><span><i class="fa-solid fa-calculator"></i>完整利润模型</span><span><i class="fa-solid fa-truck-fast"></i>本地化物流</span></div>
+            </div>
+            <div class="platform-card card-ozon" role="button" tabindex="0" aria-label="创建 Ozon 产品核算" onclick="createNewProduct('Ozon')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();createNewProduct('Ozon')}">
+                <div class="platform-card-top">
+                    <span class="platform-kicker">OZON</span>
+                    <span class="platform-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+                <div class="platform-logo-row"><div class="logo-ozon">OZON</div></div>
                 <div class="sub-text">创建 Ozon 产品核算</div>
+                <div class="platform-meta"><span><i class="fa-solid fa-table-cells"></i>矩阵费率</span><span><i class="fa-solid fa-chart-pie"></i>收益分析</span></div>
             </div>
         </div>
         
         <div class="table-container">
-            <div class="filter-bar">
-                <select id="platformFilter" class="filter-select" onchange="renderTable()">
-                    <option value="All">全平台 (WB & OZON)</option>
-                    <option value="WB">仅 WB</option>
-                    <option value="Ozon">仅 OZON</option>
-                </select>
-                <input type="text" id="skuFilter" class="filter-input" placeholder="输入 SKU 或名称搜索..." oninput="renderTable()">
+            <div class="table-toolbar">
+                <div>
+                    <div class="section-eyebrow">方案管理</div>
+                    <h3>定价方案库</h3>
+                </div>
+                <div class="count-pill" id="productCount">0 个方案</div>
             </div>
-            <table id="productTable">
-                <thead><tr><th>平台</th><th>SKU / 产品名称</th><th>定价 (RUB)</th><th>平台佣金 (RUB)</th><th>物流总资费 (RUB)</th><th>平台总扣费 (RUB)</th><th>平台扣费占比</th><th>每单位利润 (RMB)</th><th>净利润率</th><th>投资回报率</th><th>操作</th></tr></thead>
-                <tbody id="tableBody"></tbody>
-            </table>
+            <div class="filter-bar">
+                <div class="filter-control">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <select id="platformFilter" class="filter-select" aria-label="按平台筛选" onchange="renderTable()">
+                        <option value="All">全平台 (WB & OZON)</option>
+                        <option value="WB">仅 WB</option>
+                        <option value="Ozon">仅 OZON</option>
+                    </select>
+                </div>
+                <div class="filter-control">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="skuFilter" class="filter-input" aria-label="搜索 SKU 或产品名称" placeholder="输入 SKU 或名称搜索..." oninput="renderTable()">
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table id="productTable">
+                    <thead><tr><th>平台</th><th>SKU / 产品名称</th><th>定价 (RUB)</th><th>平台佣金 (RUB)</th><th>物流总资费 (RUB)</th><th>平台总扣费 (RUB)</th><th>平台扣费占比</th><th>每单位利润 (RMB)</th><th>净利润率</th><th>投资回报率</th><th>操作</th></tr></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -279,36 +1206,36 @@
     <div id="detailView" style="display: none;" class="fade-in">
         
         <div class="action-bar">
-            <div style="display: flex; gap: 0.8rem; align-items: center;">
-                <button class="btn btn-outline" onclick="showDashboard()">返回大厅</button>
+            <div class="action-cluster action-main">
+                <button class="btn btn-outline" onclick="showDashboard()"><i class="fa-solid fa-arrow-left"></i><span class="btn-label">返回大厅</span></button>
                 <span id="currentPlatBadge" class="plat-tag tag-wb">WB</span>
                 <input type="text" class="sku-input" id="skuName" placeholder="录入 SKU 或品名...">
-                <button class="btn btn-success" onclick="saveProduct()">保存方案</button>
+                <button class="btn btn-success" onclick="saveProduct()"><i class="fa-regular fa-floppy-disk"></i>保存方案<span class="shortcut-hint">Ctrl S</span></button>
             </div>
-            <div style="display: flex; gap: 0.8rem; align-items: center;">
-                <button class="btn btn-outline" style="color: #4f46e5; border-color: #c7d2fe;" onclick="copyToClipboard(this)">
-                    📸 一键生成长图
+            <div class="action-cluster action-tools">
+                <button class="btn btn-outline" onclick="copyToClipboard(this)">
+                    <i class="fa-regular fa-image"></i>生成长图
                 </button>
                 <div class="template-group">
                     <div class="select-wrapper" style="width: 140px;"><select id="templateSelect"><option value="">-- 参数模板 --</option></select></div>
-                    <button class="btn-icon" style="color:var(--color-indigo-500)" onclick="applyTemplate()" title="应用">应用</button>
-                    <button class="btn-icon" style="color:var(--color-amber-500)" onclick="saveAsTemplate()" title="存为模板">存</button>
-                    <button class="btn-icon" style="color:var(--color-red-600)" onclick="deleteTemplate()" title="删除模板">删</button>
+                    <button class="btn-icon" onclick="applyTemplate()" title="应用">应用</button>
+                    <button class="btn-icon" onclick="saveAsTemplate()" title="存为模板">存</button>
+                    <button class="btn-icon" onclick="deleteTemplate()" title="删除模板">删</button>
                 </div>
             </div>
         </div>
 
-        <div id="captureArea" style="padding: 10px; margin: -10px; border-radius: 20px;">
+        <div id="captureArea">
             <div class="detail-grid">
                 
                 <div class="col-left">
                     <!-- 模块 1：基础信息 -->
                     <div class="card" id="module-1">
                         <h2 class="card-title"><div class="card-title-indicator bg-indigo"></div>产品基础信息</h2>
-                        <div class="input-row">
+                        <div class="input-row product-basics-row">
                             <div class="input-group"><label>产品成本 (RMB)</label><div class="input-wrapper"><span class="symbol">¥</span><input type="number" id="productCost" placeholder="0" oninput="calculateAll()"></div></div>
                             <div class="input-group"><label>汇率 (RUB/RMB)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="exchangeRate" placeholder="12.5" oninput="calculateAll()"></div></div>
-                            <div class="combo-group"><label>尺寸 (长 × 宽 × 高 cm)</label><div class="combo-inputs"><input type="number" id="length" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="width" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="height" placeholder="0" oninput="calculateAll()"></div></div>
+                            <div class="combo-group dimension-field"><label>尺寸 (长 × 宽 × 高 cm)</label><div class="combo-inputs"><input type="number" id="length" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="width" placeholder="0" oninput="calculateAll()"><span class="multiply-sign">×</span><input type="number" id="height" placeholder="0" oninput="calculateAll()"></div></div>
                         </div>
                         <div class="result-row">
                             <div class="result-box res-tint-gray res-small text-left-input"><label>产品体积 (L)</label><div class="input-wrapper"><input type="text" id="volume" readonly placeholder="0.00"></div></div>
@@ -354,6 +1281,7 @@
                                         <!-- 💡 修复：笔误修正 7% -> 6% -->
                                         <option value="t3">销售税 6% + 5% НДС</option>
                                         <option value="t4">所得税 15% + 5% НДС</option>
+                                        <option value="t6">全包税 11%（按定价计税）</option>
                                         <option value="t5">不交纳税务 (Без налогов)</option>
                                     </select>
                                 </div>
@@ -383,10 +1311,10 @@
                             <div class="result-row">
                                 <div class="result-box res-tint-blue res-small text-left-input"><label>买家到手价</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_buyerPrice" readonly placeholder="0"></div></div>
                                 <div class="result-box res-tint-red res-small text-left-input"><label>佣金扣除</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_commissionFee" readonly placeholder="0"></div></div>
-                                <div class="result-box res-tint-amber res-small text-left-input"><label>收单费 (1.5%)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_bankFee" readonly placeholder="0"></div></div>
+                                <div class="result-box res-tint-amber res-small text-left-input"><label>收单费 (2.6%)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_bankFee" readonly placeholder="0"></div></div>
                             </div>
                             
-                            <div class="sub-module-title">🚚 WB 配送费用明细</div>
+                            <div class="sub-module-title">WB 配送费用</div>
                             <div class="input-row">
                                 <div class="input-group"><label>发货方案</label><div class="select-wrapper"><select id="wb_shippingMethod" onchange="calculateAll()"><option value="FBS">FBS</option><option value="FBW">FBW</option></select></div></div>
                                 <div class="input-group">
@@ -401,7 +1329,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="input-group"><label>КРП</label><div class="input-wrapper"><input type="text" id="wb_krpRatio" readonly style="color:#10b981;"><span class="symbol" style="color:#10b981;">%</span></div></div>
                             </div>
                             <div class="input-row">
                                 <div class="input-group"><label>基本费</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="wb_baseRate" placeholder="0" oninput="calculateAll()"></div></div>
@@ -414,12 +1341,12 @@
                                 <div class="result-box res-tint-teal res-small text-left-input"><label>全程配送</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_totalJourney" readonly placeholder="0"></div></div>
                                 <div class="result-box res-tint-teal res-small text-left-input"><label>逆向处理</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_reverseFee" readonly placeholder="0"></div></div>
                             </div>
-                            <div class="result-row">
+                            <div class="result-row logistics-totals-row">
                                 <div class="result-box res-dark-teal res-small"><label>物流总资费 (按概率均摊)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_totalLogisticsCost" readonly placeholder="0"></div></div>
-                                <div class="result-box res-light-indigo res-small"><label>物流占收入比</label><div class="input-wrapper"><input type="text" id="wb_logRatio" readonly placeholder="0.00"><span class="symbol">%</span></div></div>
+                                <div class="result-box res-light-indigo res-small logistics-ratio-value"><label>物流占收入比</label><div class="input-wrapper"><input type="text" id="wb_logRatio" readonly placeholder="0.00"><span class="symbol">%</span></div></div>
                             </div>
                             
-                            <div class="sub-module-title">📄 WB 杂项与仓储费用</div>
+                            <div class="sub-module-title">WB 杂项与仓储</div>
                             <div class="input-row">
                                 <div class="input-group"><label>广告其它</label><div class="input-wrapper"><input type="number" id="wb_adRate" placeholder="0.0" oninput="calculateAll()"><span class="symbol">%</span></div></div>
                                 <div class="input-group"><label>仓储 每L/天</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="wb_storagePerL" placeholder="0.00" oninput="calculateAll()"></div></div>
@@ -430,9 +1357,9 @@
                                 <div class="result-box res-tint-amber res-small text-left-input"><label>FBW仓租 (30天)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="wb_fbwStorageFee" readonly placeholder="0"></div></div>
                             </div>
                             
-                            <div class="result-row" style="margin-top:1.5rem;">
-                                <div class="result-box res-solid-red text-left-input" style="padding:1.25rem;"><label style="font-size:1rem;">WB 平台总扣费 (RUB)</label><div class="input-wrapper"><span class="symbol" style="font-size:1.5rem;">₽</span><input type="text" id="wb_wbTotalDeduction" readonly placeholder="0" style="font-size:2.25rem;"></div></div>
-                                <div class="result-box res-solid-red text-left-input" style="padding:1.25rem; flex: 0.5;"><label style="font-size:1rem;">平台扣费占比</label><div class="input-wrapper"><input type="text" id="wb_wbDeductionRatio" readonly placeholder="0.00" style="font-size: 1.8rem;"><span class="symbol" style="font-size: 1.25rem;">%</span></div></div>
+                            <div class="result-row platform-summary-row" style="margin-top:1.5rem;">
+                                <div class="result-box platform-total text-left-input" style="padding:1.25rem;"><label style="font-size:1rem;">WB 平台总扣费 (RUB)</label><div class="input-wrapper"><span class="symbol" style="font-size:1.5rem;">₽</span><input type="text" id="wb_wbTotalDeduction" readonly placeholder="0" style="font-size:2.25rem;"></div></div>
+                                <div class="result-box platform-ratio text-left-input" style="padding:1.25rem; flex: 0.5;"><label style="font-size:1rem;">平台扣费占比</label><div class="input-wrapper"><input type="text" id="wb_wbDeductionRatio" readonly placeholder="0.00" style="font-size: 1.8rem;"><span class="symbol" style="font-size: 1.25rem;">%</span></div></div>
                             </div>
                         </div>
                     </div>
@@ -443,7 +1370,7 @@
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem; position: relative; z-index: 2;">
                                 <h2 class="card-title" style="margin:0;"><div class="card-title-indicator bg-ozon"></div>Ozon 平台费用板块</h2>
                                 <div style="text-align: right;">
-                                    <button class="btn btn-warning" style="font-size: 0.85rem; padding: 0.5rem 1rem;" onclick="document.getElementById('pasteModal').style.display='block'">⚙️ 文本直接粘贴导入 Ozon 费率表</button>
+                                    <button class="btn btn-warning" style="font-size: 0.85rem; padding: 0.5rem 1rem;" onclick="document.getElementById('pasteModal').style.display='block'"><i class="fa-solid fa-arrow-down-to-bracket"></i>导入 Ozon 费率表</button>
                                     <div id="ozonDbStatus" style="font-size: 0.8rem; color: #f59e0b; margin-top: 0.5rem; font-weight: 600; display: flex; align-items: center; justify-content: flex-end;">
                                         <span class="status-dot dot-yellow"></span>未导入 (当前使用系统底线估算)
                                     </div>
@@ -469,7 +1396,7 @@
                                 <div class="result-box res-tint-amber res-small text-left-input"><label>收单费 (1.5%)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_bankFee" readonly placeholder="0"></div></div>
                             </div>
                             
-                            <div class="sub-module-title">🚚 Ozon 矩阵物流明细</div>
+                            <div class="sub-module-title">Ozon 矩阵物流</div>
                             <div class="input-row">
                                 <div class="input-group"><label>发货方案</label><div class="select-wrapper"><select id="ozon_shippingMethod" onchange="calculateAll()"><option value="FBO">FBO</option><option value="FBS">FBS</option></select></div></div>
                                 <div class="input-group"><label>签收率</label><div class="input-wrapper"><input type="number" id="ozon_deliveryRate" placeholder="100" oninput="calculateAll()"><span class="symbol">%</span></div></div>
@@ -497,18 +1424,17 @@
                                 <div class="input-group" id="ozon_processing_container" style="transition: all 0.2s ease;"><label>包裹处理费 (FBS)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="ozon_processing" placeholder="0" oninput="calculateAll()"></div></div>
                                 <div class="input-group"><label style="color:#005bff;">退货处理费</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="ozon_returnProcessing" placeholder="0" oninput="calculateAll()"></div></div>
                             </div>
-                            <div class="result-row" style="background:#f0fdfa; border-radius:1rem; padding: 0.5rem; margin-top:0.5rem; border:none;">
-                                <div class="result-box text-left-input" style="padding:0.5rem; background:transparent; border:none;"><label>去程分拣 (查表)</label><div class="input-wrapper"><span class="symbol" style="color:#0d9488;">₽</span><input type="text" id="ozon_fwdSort" readonly placeholder="0" style="color:#0d9488;"></div></div>
-                                <div class="result-box text-left-input" style="padding:0.5rem; background:transparent; border:none;" id="ozon_crossMarkup_container"><label>非本地加价 (FBO)</label><div class="input-wrapper"><span class="symbol" style="color:#0d9488;">₽</span><input type="text" id="ozon_crossMarkup" readonly placeholder="0" style="color:#0d9488;"></div></div>
-                                <div class="result-box res-dark-teal res-small" style="margin-left:auto;"><label>正向·全程配送</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_forwardTotal" readonly placeholder="0"></div></div>
+                            <div class="result-row logistics-summary-row">
+                                <div class="result-box res-plain text-left-input"><label>去程分拣 (查表)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_fwdSort" readonly placeholder="0"></div></div>
+                                <div class="result-box res-dark-teal res-small"><label>正向·全程配送</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_forwardTotal" readonly placeholder="0"></div></div>
                                 <div class="result-box res-dark-rose res-small"><label>逆向·退回仓</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_reverseTotal" readonly placeholder="0"></div></div>
                             </div>
-                            <div class="result-row">
+                            <div class="result-row logistics-totals-row">
                                 <div class="result-box res-dark-ozon res-small"><label>Ozon 物流总资费 (期望概率)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_totalLogisticsCost" readonly placeholder="0"></div></div>
-                                <div class="result-box res-light-indigo res-small"><label>物流占收入比</label><div class="input-wrapper"><input type="text" id="ozon_logRatio" readonly placeholder="0.00"><span class="symbol">%</span></div></div>
+                                <div class="result-box res-light-indigo res-small logistics-ratio-value"><label>物流占收入比</label><div class="input-wrapper"><input type="text" id="ozon_logRatio" readonly placeholder="0.00"><span class="symbol">%</span></div></div>
                             </div>
                             
-                            <div class="sub-module-title">📄 Ozon 杂项与仓储费用</div>
+                            <div class="sub-module-title">Ozon 杂项与仓储</div>
                             <div class="input-row">
                                 <div class="input-group"><label>广告其它</label><div class="input-wrapper"><input type="number" id="ozon_adRate" placeholder="0.0" oninput="calculateAll()"><span class="symbol">%</span></div></div>
                                 <div class="input-group"><label>仓储 每L/天</label><div class="input-wrapper"><span class="symbol">₽</span><input type="number" id="ozon_storagePerL" placeholder="0.00" oninput="calculateAll()"></div></div>
@@ -518,9 +1444,9 @@
                                 <div class="result-box res-tint-amber res-small text-left-input"><label>无法均摊 (1%)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_unallocatedFee" readonly placeholder="0"></div></div>
                                 <div class="result-box res-tint-amber res-small text-left-input"><label>FBO仓租 (30天)</label><div class="input-wrapper"><span class="symbol">₽</span><input type="text" id="ozon_fboStorageFee" readonly placeholder="0"></div></div>
                             </div>
-                            <div class="result-row" style="margin-top:1.5rem;">
-                                <div class="result-box res-solid-red text-left-input" style="padding:1.25rem;"><label style="font-size:1rem;">Ozon 平台总扣费 (RUB)</label><div class="input-wrapper"><span class="symbol" style="font-size:1.5rem;">₽</span><input type="text" id="ozon_wbTotalDeduction" readonly placeholder="0" style="font-size:2.25rem;"></div></div>
-                                <div class="result-box res-solid-red text-left-input" style="padding:1.25rem; flex: 0.5;"><label style="font-size:1rem;">平台扣费占比</label><div class="input-wrapper"><input type="text" id="ozon_wbDeductionRatio" readonly placeholder="0.00" style="font-size: 1.8rem;"><span class="symbol" style="font-size: 1.25rem;">%</span></div></div>
+                            <div class="result-row platform-summary-row" style="margin-top:1.5rem;">
+                                <div class="result-box platform-total text-left-input" style="padding:1.25rem;"><label style="font-size:1rem;">Ozon 平台总扣费 (RUB)</label><div class="input-wrapper"><span class="symbol" style="font-size:1.5rem;">₽</span><input type="text" id="ozon_wbTotalDeduction" readonly placeholder="0" style="font-size:2.25rem;"></div></div>
+                                <div class="result-box platform-ratio text-left-input" style="padding:1.25rem; flex: 0.5;"><label style="font-size:1rem;">平台扣费占比</label><div class="input-wrapper"><input type="text" id="ozon_wbDeductionRatio" readonly placeholder="0.00" style="font-size: 1.8rem;"><span class="symbol" style="font-size: 1.25rem;">%</span></div></div>
                             </div>
                         </div>
                     </div>
@@ -560,7 +1486,37 @@
     </div>
 </div>
 
+<div id="toastStack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+
 <script>
+// ==================== 轻量交互反馈与快捷操作 ====================
+function showToast(message, type = 'success') {
+    let stack = document.getElementById('toastStack');
+    if (!stack) return;
+    let toast = document.createElement('div');
+    toast.className = 'toast' + (type === 'error' ? ' error' : '');
+    let icon = document.createElement('i');
+    icon.className = `fa-solid ${type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check'}`;
+    let text = document.createElement('span');
+    text.textContent = message;
+    toast.append(icon, text);
+    stack.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('out');
+        setTimeout(() => toast.remove(), 240);
+    }, 2600);
+}
+
+document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        let detailView = document.getElementById('detailView');
+        if (detailView && detailView.style.display !== 'none') {
+            e.preventDefault();
+            saveProduct();
+        }
+    }
+});
+
 // ==================== 📸 防降级增强版一键截图引擎 ====================
 async function copyToClipboard(btn) {
     let originalHTML = btn.innerHTML;
@@ -574,7 +1530,7 @@ async function copyToClipboard(btn) {
         let targetArea = document.getElementById('captureArea');
         let canvas = await html2canvas(targetArea, {
             scale: 2, 
-            backgroundColor: '#f1f5f9',
+            backgroundColor: '#f4f6fb',
             useCORS: true,
             logging: false
         });
@@ -583,34 +1539,36 @@ async function copyToClipboard(btn) {
             try {
                 const item = new ClipboardItem({ 'image/png': blob });
                 await navigator.clipboard.write([item]);
-                btn.innerHTML = '✅ 已复制，可直接粘贴！';
+                btn.innerHTML = '已复制，可直接粘贴';
                 btn.style.backgroundColor = '#10b981';
                 btn.style.color = '#fff';
                 btn.style.borderColor = '#10b981';
+                showToast('长图已复制，可直接粘贴使用');
             } catch (err) {
                 // 浏览器权限禁止时自动降级为下载
                 let a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
                 a.download = `核算方案截图_${Date.now()}.png`;
                 a.click();
-                btn.innerHTML = '✅ 已自动下载长截图！';
+                btn.innerHTML = '长图已自动下载';
                 btn.style.backgroundColor = '#10b981';
                 btn.style.color = '#fff';
                 btn.style.borderColor = '#10b981';
+                showToast('长图已生成并自动下载');
             }
             
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.style.backgroundColor = '';
-                btn.style.color = '#4f46e5';
-                btn.style.borderColor = '#c7d2fe';
+                btn.style.color = '';
+                btn.style.borderColor = '';
                 btn.disabled = false;
             }, 3000);
             
             document.body.classList.remove('no-animation');
         }, 'image/png');
     } catch (err) {
-        alert('截图引擎生成失败！');
+        showToast('截图生成失败，请稍后重试', 'error');
         btn.innerHTML = originalHTML;
         btn.disabled = false;
         document.body.classList.remove('no-animation');
@@ -625,23 +1583,13 @@ document.addEventListener('keydown', e => { if (e.key === 'F12' || (e.ctrlKey &&
 
 // WB 本地化指数配置表
 const wbLocMap = {
-    "95-100": { reg: 0.5, krp: 0.00 }, "90-94":  { reg: 0.65, krp: 0.00 }, "85-89":  { reg: 0.75, krp: 0.00 },
-    "80-84":  { reg: 0.85, krp: 0.00 }, "75-79":  { reg: 0.95, krp: 0.00 }, "70-74":  { reg: 1.0, krp: 0.00 },
-    "65-69":  { reg: 1.0, krp: 0.00 }, "60-64":  { reg: 1.0, krp: 0.00 }, "55-59":  { reg: 1.05, krp: 0.02 },
-    "50-54":  { reg: 1.15, krp: 0.0205 }, "45-49":  { reg: 1.25, krp: 0.0205 }, "40-44":  { reg: 1.35, krp: 0.021 },
-    "35-39":  { reg: 1.45, krp: 0.021 }, "30-34":  { reg: 1.55, krp: 0.0215 }, "25-29":  { reg: 1.65, krp: 0.022 },
-    "20-24":  { reg: 1.75, krp: 0.0225 }, "15-19":  { reg: 1.85, krp: 0.023 }, "10-14":  { reg: 1.9, krp: 0.0235 },
-    "5-9":    { reg: 1.95, krp: 0.0245 }, "0-4":    { reg: 2.0, krp: 0.025 }, "none":   { reg: 1.0, krp: 0.00 }
-};
-
-// Ozon 非本地集群加价字典
-const ozonCrossMarkupRate = {
-    "Алматы": 0.06, "Армения": 0, "Астана": 0.06, "Беларусь": 0.06, "Воронеж": 0.08, "Дальний Восток": 0,
-    "Екатеринбург": 0.08, "Казань": 0.08, "Калининград": 0.08, "Краснодар": 0.08, "Красноярск": 0,
-    "Кыргызстан": 0, "Махачкала": 0.08, "Москва, МО и Дальние регионы": 0.08, "Невинномысск": 0.08,
-    "Новосибирск": 0, "Омск": 0.12, "Оренбург": 0.12, "Пермь": 0.12, "Ростов": 0, "Самара": 0.12,
-    "Санкт-Петербург и СЗО": 0.08, "Саратов": 0.08, "Тверь": 0.08, "Тюмень": 0.08, "Узбекистан": 0,
-    "Уфа": 0.08, "Ярославль": 0.08
+    "95-100": { reg: 0.5 }, "90-94":  { reg: 0.65 }, "85-89":  { reg: 0.75 },
+    "80-84":  { reg: 0.85 }, "75-79":  { reg: 0.95 }, "70-74":  { reg: 1.0 },
+    "65-69":  { reg: 1.0 }, "60-64":  { reg: 1.0 }, "55-59":  { reg: 1.05 },
+    "50-54":  { reg: 1.15 }, "45-49":  { reg: 1.25 }, "40-44":  { reg: 1.35 },
+    "35-39":  { reg: 1.45 }, "30-34":  { reg: 1.55 }, "25-29":  { reg: 1.65 },
+    "20-24":  { reg: 1.75 }, "15-19":  { reg: 1.85 }, "10-14":  { reg: 1.9 },
+    "5-9":    { reg: 1.95 }, "0-4":    { reg: 2.0 }, "none":   { reg: 1.0 }
 };
 
 // 💡 修正：俄罗斯本土税制配置 (修正了 t3 的基础税率为 6)
@@ -650,6 +1598,7 @@ const taxMap = {
     "t2": { base: 15, vat: 0, type: 'profit' },
     "t3": { base: 6,  vat: 5, type: 'sales' },
     "t4": { base: 15, vat: 5, type: 'profit' },
+    "t6": { base: 11, vat: 0, type: 'sales' },
     "t5": { base: 0,  vat: 0, type: 'sales' }
 };
 
@@ -851,7 +1800,7 @@ function parsePastedExcel() {
             volBands.sort((a,b) => a.max - b.max);
             setData('ozon_vol_bands', volBands);
             setData('ozon_matrix_cache', matrix);
-            alert(`🎉 数据解析成功！\n系统已提取并永久保存了 ${count} 条精准路线组合。`);
+            alert(`数据解析成功！\n系统已提取并永久保存了 ${count} 条精准路线组合。`);
             document.getElementById('csvPasteArea').value = '';
             document.getElementById('pasteModal').style.display = 'none';
             updateOzonDbStatus();
@@ -905,12 +1854,10 @@ function calculateAll() {
             setFmt('wb_buyerPrice', buyerPrice);
             let commissionFee = price * (getVal('wb_commissionRate') / 100);
             setFmt('wb_commissionFee', commissionFee);
-            let bankFee = price * 0.015; 
+            let bankFee = price * 0.026; 
             setFmt('wb_bankFee', bankFee);
 
-            let locInfo = wbLocMap[document.getElementById('wb_locIndex').value] || { reg: 1.0, krp: 0 };
-            let krpEl = document.getElementById('wb_krpRatio');
-            if (krpEl) krpEl.value = (locInfo.krp * 100).toFixed(2);
+            let locInfo = wbLocMap[document.getElementById('wb_locIndex').value] || { reg: 1.0 };
             let fbwMultiplier = getVal('wb_fbwMultiplier') || 1;
             let shippingMethod = document.getElementById('wb_shippingMethod').value;
             let baseRate = getVal('wb_baseRate');
@@ -929,7 +1876,7 @@ function calculateAll() {
 
             let reverseFee = baseRate + ((volume > 1 ? volume - 1 : 0) * over1LRate);
             setFmt('wb_reverseFee', reverseFee);
-            let totalJourney = (locInfo.reg * logisticsFee) + (price * locInfo.krp);
+            let totalJourney = locInfo.reg * logisticsFee;
             setFmt('wb_totalJourney', totalJourney);
             
             let deliveryRate = getVal('wb_deliveryRate');
@@ -968,11 +1915,7 @@ function calculateAll() {
             let fromC = document.getElementById('ozon_fromCluster').value;
             let toC = document.getElementById('ozon_toCluster').value;
             
-            let elCross = document.getElementById('ozon_crossMarkup');
             let elProc = document.getElementById('ozon_processing');
-            if (elCross && elCross.parentElement && elCross.parentElement.parentElement) {
-                elCross.parentElement.parentElement.style.opacity = method === 'FBS' ? '0.3' : '1';
-            }
             if (elProc && elProc.parentElement && elProc.parentElement.parentElement) {
                 elProc.parentElement.parentElement.style.opacity = method === 'FBO' ? '0.3' : '1';
             }
@@ -980,18 +1923,11 @@ function calculateAll() {
             let fwdSort = getOzonSortFee(volume, price, fromC, toC);
             setFmt('ozon_fwdSort', fwdSort);
 
-            let crossMarkup = 0;
-            if (method === 'FBO' && fromC !== toC) {
-                let rate = ozonCrossMarkupRate[toC] || 0;
-                crossMarkup = price * rate;
-            }
-            setFmt('ozon_crossMarkup', crossMarkup);
-
             let lastMile = getVal('ozon_lastMile');
             let processing = method === 'FBS' ? getVal('ozon_processing') : 0; 
             let returnProc = getVal('ozon_returnProcessing');
 
-            let forwardTotal = fwdSort + crossMarkup + processing + lastMile;
+            let forwardTotal = fwdSort + processing + lastMile;
             setFmt('ozon_forwardTotal', forwardTotal);
 
             let revSort = getOzonSortFee(volume, price, toC, toC); 
@@ -1132,14 +2068,14 @@ function saveAsTemplate() {
     loadTemplateDropdown();
     let select = document.getElementById('templateSelect');
     if(select) select.value = name;
-    alert('模板保存成功！');
+    showToast(`模板“${name}”已保存`);
 }
 
 function applyTemplate() {
     let select = document.getElementById('templateSelect');
     if(!select) return;
     let name = select.value;
-    if (!name) { alert('请先选择模板！'); return; }
+    if (!name) { showToast('请先选择一个参数模板', 'error'); return; }
     
     let templates = getData('erp_templates');
     let tplData = templates[name];
@@ -1149,6 +2085,7 @@ function applyTemplate() {
             if (el) el.value = tplData[key];
         }
         calculateAll();
+        showToast(`模板“${name}”已应用`);
     }
 }
 
@@ -1162,6 +2099,7 @@ function deleteTemplate() {
         delete templates[name];
         setData('erp_templates', templates);
         loadTemplateDropdown();
+        showToast(`模板“${name}”已删除`);
     }
 }
 
@@ -1173,6 +2111,7 @@ function showDashboard() {
     let da = document.getElementById('dashboardActions');
     if (da) da.style.display = 'flex';
     renderTable();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function togglePlatformView(plat) {
@@ -1212,6 +2151,10 @@ function createNewProduct(plat) {
     if(dtv) dtv.style.display = 'block';
     let da = document.getElementById('dashboardActions');
     if(da) da.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    requestAnimationFrame(() => {
+        if (skuInput) skuInput.focus();
+    });
 }
 
 function editProduct(id) {
@@ -1236,6 +2179,10 @@ function editProduct(id) {
         if(dtv) dtv.style.display = 'block';
         let da = document.getElementById('dashboardActions');
         if(da) da.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        requestAnimationFrame(() => {
+            if (skuIn) skuIn.focus();
+        });
     }
 }
 
@@ -1245,6 +2192,7 @@ function deleteProduct(id) {
         delete products[id];
         setData('erp_products', products);
         renderTable();
+        showToast('定价方案已删除');
     }
 }
 
@@ -1252,7 +2200,8 @@ function saveProduct() {
     try {
         let skuEl = document.getElementById('skuName');
         if (!skuEl || !skuEl.value.trim()) {
-            alert('提示：请先在上方填写 SKU 或产品名称！');
+            if (skuEl) skuEl.focus();
+            showToast('请先填写 SKU 或产品名称', 'error');
             return;
         }
         let skuName = skuEl.value.trim();
@@ -1295,8 +2244,9 @@ function saveProduct() {
         
         setData('erp_products', products);
         showDashboard();
+        showToast(`“${skuName}”已保存`);
     } catch (err) {
-        alert('保存失败，错误信息: ' + err.message);
+        showToast('保存失败：' + err.message, 'error');
     }
 }
 
@@ -1308,9 +2258,11 @@ function renderTable() {
         let products = getData('erp_products') || {};
         tbody.innerHTML = '';
         let keys = Object.keys(products);
+        let countEl = document.getElementById('productCount');
+        if (countEl) countEl.textContent = `${keys.length} 个方案`;
         
         if (keys.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color:#9ca3af; padding: 3rem;">暂无产品数据，请点击上方品牌入口新建</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color:#8b98aa; padding: 3.2rem;"><i class="fa-regular fa-folder-open" style="font-size:1.35rem; margin-right:.45rem;"></i>暂无定价方案，请从上方选择平台新建</td></tr>';
             return;
         }
         
@@ -1328,9 +2280,10 @@ function renderTable() {
             let matchesSku = (p.sku || '').toLowerCase().includes(skuFilter);
             return matchesPlatform && matchesSku;
         });
+        if (countEl) countEl.textContent = `${arr.length} 个方案`;
 
         if (arr.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color:#9ca3af; padding: 3rem;">未能检索到符合条件的数据</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color:#8b98aa; padding: 3.2rem;"><i class="fa-solid fa-magnifying-glass" style="margin-right:.45rem;"></i>没有找到符合当前条件的方案</td></tr>';
             return;
         }
         
@@ -1348,7 +2301,7 @@ function renderTable() {
             
             tr.innerHTML = `
             <td>${platTag}</td>
-            <td style="color:#6366f1; font-weight: 800;">${p.sku || '未知'}</td>
+            <td class="sku-cell">${p.sku || '未知'}</td>
             <td>₽ ${sum.price || '0'}</td>
             <td>₽ ${commissionDisplay}</td>
             <td>₽ ${sum.totalLogisticsCost || '0'}</td>
@@ -1386,7 +2339,7 @@ function exportData() {
     let templates = getData('erp_templates');
     
     if (Object.keys(products).length === 0 && Object.keys(templates).length === 0) {
-        alert('当前没有任何数据可导出！');
+        showToast('当前没有可导出的数据', 'error');
         return;
     }
     let blob = new Blob([JSON.stringify({ products: products, templates: templates })], { type: 'application/json' });
@@ -1394,6 +2347,7 @@ function exportData() {
     a.href = URL.createObjectURL(blob);
     a.download = `双核定价系统备份_${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
+    showToast('数据备份已导出');
 }
 
 function importData(event) {
@@ -1409,10 +2363,11 @@ function importData(event) {
             } else {
                 setData('erp_products', jsonData);
             }
-            alert('数据导入成功！');
             loadTemplateDropdown();
             renderTable();
-        } catch (err) { alert('文件格式错误！导入失败。'); }
+            showToast('数据导入成功');
+        } catch (err) { showToast('文件格式错误，导入失败', 'error'); }
+        event.target.value = '';
     };
     reader.readAsText(file);
 }
